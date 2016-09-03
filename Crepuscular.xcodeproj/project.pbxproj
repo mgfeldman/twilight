@@ -1,0 +1,428 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4D10EF4B1D70AAC500FB813E /* LocationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D10EF4A1D70AAC500FB813E /* LocationServices.swift */; };
+		4D534D7C1D70AC4C00ED90DC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D534D7B1D70AC4C00ED90DC /* CoreLocation.framework */; };
+		4D534D7F1D70E07000ED90DC /* WeatherStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D534D7E1D70E07000ED90DC /* WeatherStation.swift */; };
+		4D534D811D70E0A500ED90DC /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D534D801D70E0A500ED90DC /* Location.swift */; };
+		4D534D831D70E0D300ED90DC /* CoordinateLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D534D821D70E0D300ED90DC /* CoordinateLocation.swift */; };
+		4D534D861D70E51100ED90DC /* WundergroundWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D534D851D70E51100ED90DC /* WundergroundWebService.swift */; };
+		4DF10BCD1D6FD53700F2F183 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF10BCC1D6FD53700F2F183 /* AppDelegate.swift */; };
+		4DF10BCF1D6FD53700F2F183 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF10BCE1D6FD53700F2F183 /* ViewController.swift */; };
+		4DF10BD21D6FD53700F2F183 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DF10BD01D6FD53700F2F183 /* Main.storyboard */; };
+		4DF10BD41D6FD53700F2F183 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DF10BD31D6FD53700F2F183 /* Assets.xcassets */; };
+		4DF10BD71D6FD53700F2F183 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DF10BD51D6FD53700F2F183 /* LaunchScreen.storyboard */; };
+		5C2E2A9EEE200A27B2E96D66 /* Pods_Crepuscular.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25745D8E9C2A6FFB2E1BAE30 /* Pods_Crepuscular.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		25745D8E9C2A6FFB2E1BAE30 /* Pods_Crepuscular.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Crepuscular.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B4617D91667F90476D4BCAB /* Pods-Crepuscular.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Crepuscular.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Crepuscular/Pods-Crepuscular.debug.xcconfig"; sourceTree = "<group>"; };
+		4D10EF4A1D70AAC500FB813E /* LocationServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationServices.swift; sourceTree = "<group>"; };
+		4D534D7B1D70AC4C00ED90DC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4D534D7E1D70E07000ED90DC /* WeatherStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherStation.swift; sourceTree = "<group>"; };
+		4D534D801D70E0A500ED90DC /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		4D534D821D70E0D300ED90DC /* CoordinateLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinateLocation.swift; sourceTree = "<group>"; };
+		4D534D851D70E51100ED90DC /* WundergroundWebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WundergroundWebService.swift; sourceTree = "<group>"; };
+		4DF10BC91D6FD53700F2F183 /* Crepuscular.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crepuscular.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DF10BCC1D6FD53700F2F183 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4DF10BCE1D6FD53700F2F183 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4DF10BD11D6FD53700F2F183 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4DF10BD31D6FD53700F2F183 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4DF10BD61D6FD53700F2F183 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4DF10BD81D6FD53700F2F183 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7F6E94FEFC946121DB352F0 /* Pods-Crepuscular.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Crepuscular.release.xcconfig"; path = "Pods/Target Support Files/Pods-Crepuscular/Pods-Crepuscular.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4DF10BC61D6FD53700F2F183 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D534D7C1D70AC4C00ED90DC /* CoreLocation.framework in Frameworks */,
+				5C2E2A9EEE200A27B2E96D66 /* Pods_Crepuscular.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4ABCEB9CDD4B3C430C6DD708 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4D534D7B1D70AC4C00ED90DC /* CoreLocation.framework */,
+				25745D8E9C2A6FFB2E1BAE30 /* Pods_Crepuscular.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4D534D7D1D70E05300ED90DC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4D534D7E1D70E07000ED90DC /* WeatherStation.swift */,
+				4D534D801D70E0A500ED90DC /* Location.swift */,
+				4D534D821D70E0D300ED90DC /* CoordinateLocation.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		4D534D841D70E4F900ED90DC /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				4D534D851D70E51100ED90DC /* WundergroundWebService.swift */,
+			);
+			name = Api;
+			sourceTree = "<group>";
+		};
+		4DF10BC01D6FD53700F2F183 = {
+			isa = PBXGroup;
+			children = (
+				4DF10BCB1D6FD53700F2F183 /* Crepuscular */,
+				4DF10BCA1D6FD53700F2F183 /* Products */,
+				F7637C8CC9164CDBC0818364 /* Pods */,
+				4ABCEB9CDD4B3C430C6DD708 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4DF10BCA1D6FD53700F2F183 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4DF10BC91D6FD53700F2F183 /* Crepuscular.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4DF10BCB1D6FD53700F2F183 /* Crepuscular */ = {
+			isa = PBXGroup;
+			children = (
+				4D534D841D70E4F900ED90DC /* Api */,
+				4D534D7D1D70E05300ED90DC /* Model */,
+				4DF10BCC1D6FD53700F2F183 /* AppDelegate.swift */,
+				4DF10BCE1D6FD53700F2F183 /* ViewController.swift */,
+				4DF10BD01D6FD53700F2F183 /* Main.storyboard */,
+				4DF10BD31D6FD53700F2F183 /* Assets.xcassets */,
+				4DF10BD51D6FD53700F2F183 /* LaunchScreen.storyboard */,
+				4DF10BD81D6FD53700F2F183 /* Info.plist */,
+				4D10EF4A1D70AAC500FB813E /* LocationServices.swift */,
+			);
+			path = Crepuscular;
+			sourceTree = "<group>";
+		};
+		F7637C8CC9164CDBC0818364 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3B4617D91667F90476D4BCAB /* Pods-Crepuscular.debug.xcconfig */,
+				B7F6E94FEFC946121DB352F0 /* Pods-Crepuscular.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4DF10BC81D6FD53700F2F183 /* Crepuscular */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4DF10BDB1D6FD53700F2F183 /* Build configuration list for PBXNativeTarget "Crepuscular" */;
+			buildPhases = (
+				44BDC177E3F89B6418658A18 /* Check Pods Manifest.lock */,
+				4DF10BC51D6FD53700F2F183 /* Sources */,
+				4DF10BC61D6FD53700F2F183 /* Frameworks */,
+				4DF10BC71D6FD53700F2F183 /* Resources */,
+				C37B4A98EB5710566802A7F3 /* Embed Pods Frameworks */,
+				D74C74004BE9CDAFFF49BB7D /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Crepuscular;
+			productName = Crepuscular;
+			productReference = 4DF10BC91D6FD53700F2F183 /* Crepuscular.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4DF10BC11D6FD53700F2F183 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Mark Feldman";
+				TargetAttributes = {
+					4DF10BC81D6FD53700F2F183 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 34C7D2P284;
+						LastSwiftMigration = 0800;
+					};
+				};
+			};
+			buildConfigurationList = 4DF10BC41D6FD53700F2F183 /* Build configuration list for PBXProject "Crepuscular" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4DF10BC01D6FD53700F2F183;
+			productRefGroup = 4DF10BCA1D6FD53700F2F183 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4DF10BC81D6FD53700F2F183 /* Crepuscular */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4DF10BC71D6FD53700F2F183 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DF10BD71D6FD53700F2F183 /* LaunchScreen.storyboard in Resources */,
+				4DF10BD41D6FD53700F2F183 /* Assets.xcassets in Resources */,
+				4DF10BD21D6FD53700F2F183 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		44BDC177E3F89B6418658A18 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C37B4A98EB5710566802A7F3 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Crepuscular/Pods-Crepuscular-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D74C74004BE9CDAFFF49BB7D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Crepuscular/Pods-Crepuscular-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4DF10BC51D6FD53700F2F183 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D534D831D70E0D300ED90DC /* CoordinateLocation.swift in Sources */,
+				4D534D861D70E51100ED90DC /* WundergroundWebService.swift in Sources */,
+				4DF10BCF1D6FD53700F2F183 /* ViewController.swift in Sources */,
+				4D534D7F1D70E07000ED90DC /* WeatherStation.swift in Sources */,
+				4D534D811D70E0A500ED90DC /* Location.swift in Sources */,
+				4D10EF4B1D70AAC500FB813E /* LocationServices.swift in Sources */,
+				4DF10BCD1D6FD53700F2F183 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4DF10BD01D6FD53700F2F183 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4DF10BD11D6FD53700F2F183 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4DF10BD51D6FD53700F2F183 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4DF10BD61D6FD53700F2F183 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4DF10BD91D6FD53700F2F183 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4DF10BDA1D6FD53700F2F183 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4DF10BDC1D6FD53700F2F183 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B4617D91667F90476D4BCAB /* Pods-Crepuscular.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Crepuscular/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.markfeldman.Crepuscular;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos10.0;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		4DF10BDD1D6FD53700F2F183 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7F6E94FEFC946121DB352F0 /* Pods-Crepuscular.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Crepuscular/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.markfeldman.Crepuscular;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos10.0;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4DF10BC41D6FD53700F2F183 /* Build configuration list for PBXProject "Crepuscular" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DF10BD91D6FD53700F2F183 /* Debug */,
+				4DF10BDA1D6FD53700F2F183 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4DF10BDB1D6FD53700F2F183 /* Build configuration list for PBXNativeTarget "Crepuscular" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DF10BDC1D6FD53700F2F183 /* Debug */,
+				4DF10BDD1D6FD53700F2F183 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4DF10BC11D6FD53700F2F183 /* Project object */;
+}
