@@ -10,50 +10,37 @@ import UIKit
 import CoreLocation
 import SwiftLocation
 
-// TODO: Why is this so complicated?
-let locationChangedNotification = Notification(name: Notification.Name(rawValue: "locationChanged"))
+protocol LocationServicesDelegate {
+    func locationChanged(currentLocation : CoordinateLocation)
+    
+}
 
 class LocationServices: NSObject, CLLocationManagerDelegate {
     
     static let shared = LocationServices()
-    private var currentLocation : CoordinateLocation? {
-        didSet {
-            NotificationCenter.default.post(locationChangedNotification)
-        }
-    }
+    private var currentLocation : CoordinateLocation?
+    
     let locationManager = CLLocationManager()
+    var delegates = [LocationServicesDelegate]()
     
     override init() {
         super.init()
         locationManager.requestAlwaysAuthorization()
-        _ = WundergroundWebService.shared
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
         }
     }
     
+    deinit {
+        delegates.removeAll()
+    }
+    
+    func subscribe(delegate : LocationServicesDelegate) {
+        delegates.append(delegate)
+    }
+    
     func getCurrentLocationCoordinateString() -> String? {
         return currentLocation?.coordinateString
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = manager.location else { return }
-        let locValue : CLLocationCoordinate2D = location.coordinate
-        currentLocation = CoordinateLocation(latitude: String(locValue.latitude), longitude: String(locValue.longitude))
-        // when the current location is deemed "different" enough, send a notifcation of some sort
-        // to have retrieveData go again
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
-    }
-    
-    func locationManagerDidPauseLocationUpdates(_ manager: CLLocationManager) {
-        
-    }
-    
-    func locationManagerDidResumeLocationUpdates(_ manager: CLLocationManager) {
-        
     }
     
     func getLocation() {
@@ -61,8 +48,9 @@ class LocationServices: NSObject, CLLocationManagerDelegate {
         _ = SwiftLocation.Location.getLocation(withAccuracy: .block, frequency: .byDistanceIntervals(meters: 5.0), timeout: 50, onSuccess: { (location) in
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
-            print("** Updated Location")
             self.currentLocation = CoordinateLocation(latitude: String(latitude), longitude: String(longitude))
+            self.notifyLocationChanged()
+            
         }) { (lastValidLocation, error) in
             print("Error occurred getting location: \(error.description)")
             if let location = lastValidLocation {
@@ -70,6 +58,12 @@ class LocationServices: NSObject, CLLocationManagerDelegate {
                 let longitude = location.coordinate.longitude
                 self.currentLocation = CoordinateLocation(latitude: String(latitude), longitude: String(longitude))
             }
+        }
+    }
+    
+    private func notifyLocationChanged() {
+        for delegate in delegates {
+            delegate.locationChanged(currentLocation: currentLocation!)
         }
     }
 }

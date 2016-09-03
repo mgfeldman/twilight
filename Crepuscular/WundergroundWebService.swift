@@ -9,18 +9,49 @@
 import UIKit
 import Alamofire
 
-class WundergroundWebService: NSObject {
+public enum FeatureParams : String {
+    case conditions    = "conditions"
+    case geolookup     = "geolookup"
+    case forecast      = "forecast"
+    case alerts        = "alerts"
+    case forecast10day = "forecast10day"
+    case history       = "history"
+    case hourly        = "hourly"
+    case hourly10day   = "hourly10day"
+    case planner       = "planner"
+    case rawtide       = "rawtide"
+    case tide          = "tide"
+    case webcams       = "webcams"
+    case yesterday     = "yesterday"
+    
+    var stringValue : String {
+        return self.rawValue
+    }
+}
+protocol WundergroundInformationDelegate {
+    func locationInformationUpdated(location : Location)
+}
+
+class WundergroundWebService: NSObject, LocationServicesDelegate {
     static let shared = WundergroundWebService()
     let apiKey = "005ecab154b1d3ca"
     let baseURL = "http://api.wunderground.com/api/"
+    private var delegates = [WundergroundInformationDelegate]()
     
     override init() {
         super.init()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(locationChanged), name: locationChangedNotification.name, object: nil)
+        LocationServices.shared.subscribe(delegate: self)
     }
     
-    func locationChanged() {
+    deinit {
+        delegates.removeAll()
+    }
+    
+    func subscribe(delegate : WundergroundInformationDelegate) {
+        delegates.append(delegate)
+    }
+    
+    func locationChanged(currentLocation : CoordinateLocation) {
         
         let success = { (dictionary : [String : Any]) -> Void in
             self.parseFeatureResponses(dictionary: dictionary)
@@ -40,6 +71,7 @@ class WundergroundWebService: NSObject {
             do {
                 let location = try Location(withDict: dictionary["location"] as! [String : Any])
                 print("Updated Location to ", location.city)
+                notifyLocationInformationChanged(updatedLocation: location)
             } catch {
                 
             }
@@ -98,6 +130,12 @@ class WundergroundWebService: NSObject {
         urlWithParams += ".json"
         
         return urlWithParams
+    }
+    
+    private func notifyLocationInformationChanged(updatedLocation : Location) {
+        for delegate in delegates {
+            delegate.locationInformationUpdated(location: updatedLocation)
+        }
     }
 }
 

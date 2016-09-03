@@ -104,12 +104,12 @@
 				4D534D841D70E4F900ED90DC /* Api */,
 				4D534D7D1D70E05300ED90DC /* Model */,
 				4DF10BCC1D6FD53700F2F183 /* AppDelegate.swift */,
+				4D10EF4A1D70AAC500FB813E /* LocationServices.swift */,
 				4DF10BCE1D6FD53700F2F183 /* ViewController.swift */,
 				4DF10BD01D6FD53700F2F183 /* Main.storyboard */,
 				4DF10BD31D6FD53700F2F183 /* Assets.xcassets */,
 				4DF10BD51D6FD53700F2F183 /* LaunchScreen.storyboard */,
 				4DF10BD81D6FD53700F2F183 /* Info.plist */,
-				4D10EF4A1D70AAC500FB813E /* LocationServices.swift */,
 			);
 			path = Crepuscular;
 			sourceTree = "<group>";

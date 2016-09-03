@@ -54,6 +54,17 @@ class Location: NSObject {
                 throw JSONParsingError.InvalidPayload
         }
         
+        self.type = type as! String
+        self.country = country as! String
+        self.countryISO3166 = countryISO3166 as! String
+        self.countryName = countryName as! String
+        self.state = state as! String
+        self.city = city as! String
+        self.timeZoneShort = timeZoneShort as! String
+        self.coordinates = CoordinateLocation(latitude: lat as! String, longitude: lon as! String)
+        self.zip = zip as! String
+        self.wuiURL = wuiURL as! String
+        
         // TODO: Figure out how to separate this out and avoid the reference to 'self' issue
         if let nearbyStations = dictionary[locationNearbyWeatherStationsKey] as? Dictionary<String, Any> {
             if let airportStations = nearbyStations[WeatherStationType.airport.rawValue] as? [String : Any] {
@@ -84,17 +95,7 @@ class Location: NSObject {
             }
             
         }
-        
-        self.type = type as! String
-        self.country = country as! String
-        self.countryISO3166 = countryISO3166 as! String
-        self.countryName = countryName as! String
-        self.state = state as! String
-        self.city = city as! String
-        self.timeZoneShort = timeZoneShort as! String
-        self.coordinates = CoordinateLocation(latitude: lat as! String, longitude: lon as! String)
-        self.zip = zip as! String
-        self.wuiURL = wuiURL as! String
+
     }
 }
 
