@@ -12,10 +12,9 @@ import SwiftLocation
 
 protocol LocationServicesDelegate {
     func locationChanged(currentLocation : CoordinateLocation)
-    
 }
 
-class LocationServices: NSObject, CLLocationManagerDelegate {
+class LocationServices: NSObject {
     
     static let shared = LocationServices()
     private var currentLocation : CoordinateLocation?
@@ -25,10 +24,7 @@ class LocationServices: NSObject, CLLocationManagerDelegate {
     
     override init() {
         super.init()
-        locationManager.requestAlwaysAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-        }
+        locationManager.requestWhenInUseAuthorization()
     }
     
     deinit {
@@ -46,19 +42,32 @@ class LocationServices: NSObject, CLLocationManagerDelegate {
     func getLocation() {
         
         _ = SwiftLocation.Location.getLocation(withAccuracy: .block, frequency: .byDistanceIntervals(meters: 5.0), timeout: 50, onSuccess: { (location) in
-            let latitude = location.coordinate.latitude
-            let longitude = location.coordinate.longitude
-            self.currentLocation = CoordinateLocation(latitude: String(latitude), longitude: String(longitude))
-            self.notifyLocationChanged()
+            
+            self.setCurrentLocation(location: location)
             
         }) { (lastValidLocation, error) in
             print("Error occurred getting location: \(error.description)")
-            if let location = lastValidLocation {
-                let latitude = location.coordinate.latitude
-                let longitude = location.coordinate.longitude
-                self.currentLocation = CoordinateLocation(latitude: String(latitude), longitude: String(longitude))
-            }
+            self.setCurrentLocation(location: lastValidLocation)
         }
+    }
+    
+    func setCurrentLocation(location : CLLocation?) {
+        
+        guard let loc = location else {
+            return
+        }
+        
+        let latitude = String(loc.coordinate.latitude)
+        let longitude = String(loc.coordinate.longitude)
+        
+        if self.currentLocation != nil {
+            self.currentLocation?.latitude = latitude
+            self.currentLocation?.longitude = longitude
+        } else {
+            self.currentLocation = CoordinateLocation(latitude: latitude, longitude: longitude)
+        }
+        
+        self.notifyLocationChanged()
     }
     
     private func notifyLocationChanged() {

@@ -30,7 +30,7 @@
 		4D534D801D70E0A500ED90DC /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		4D534D821D70E0D300ED90DC /* CoordinateLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinateLocation.swift; sourceTree = "<group>"; };
 		4D534D851D70E51100ED90DC /* WundergroundWebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WundergroundWebService.swift; sourceTree = "<group>"; };
-		4DF10BC91D6FD53700F2F183 /* Crepuscular.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crepuscular.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DF10BC91D6FD53700F2F183 /* Twilight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twilight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DF10BCC1D6FD53700F2F183 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DF10BCE1D6FD53700F2F183 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4DF10BD11D6FD53700F2F183 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -83,7 +83,7 @@
 		4DF10BC01D6FD53700F2F183 = {
 			isa = PBXGroup;
 			children = (
-				4DF10BCB1D6FD53700F2F183 /* Crepuscular */,
+				4DF10BCB1D6FD53700F2F183 /* Twilight */,
 				4DF10BCA1D6FD53700F2F183 /* Products */,
 				F7637C8CC9164CDBC0818364 /* Pods */,
 				4ABCEB9CDD4B3C430C6DD708 /* Frameworks */,
@@ -93,12 +93,12 @@
 		4DF10BCA1D6FD53700F2F183 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4DF10BC91D6FD53700F2F183 /* Crepuscular.app */,
+				4DF10BC91D6FD53700F2F183 /* Twilight.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4DF10BCB1D6FD53700F2F183 /* Crepuscular */ = {
+		4DF10BCB1D6FD53700F2F183 /* Twilight */ = {
 			isa = PBXGroup;
 			children = (
 				4D534D841D70E4F900ED90DC /* Api */,
@@ -111,7 +111,7 @@
 				4DF10BD51D6FD53700F2F183 /* LaunchScreen.storyboard */,
 				4DF10BD81D6FD53700F2F183 /* Info.plist */,
 			);
-			path = Crepuscular;
+			path = Twilight;
 			sourceTree = "<group>";
 		};
 		F7637C8CC9164CDBC0818364 /* Pods */ = {
@@ -126,9 +126,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4DF10BC81D6FD53700F2F183 /* Crepuscular */ = {
+		4DF10BC81D6FD53700F2F183 /* Twilight */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4DF10BDB1D6FD53700F2F183 /* Build configuration list for PBXNativeTarget "Crepuscular" */;
+			buildConfigurationList = 4DF10BDB1D6FD53700F2F183 /* Build configuration list for PBXNativeTarget "Twilight" */;
 			buildPhases = (
 				44BDC177E3F89B6418658A18 /* Check Pods Manifest.lock */,
 				4DF10BC51D6FD53700F2F183 /* Sources */,
@@ -141,9 +141,9 @@
 			);
 			dependencies = (
 			);
-			name = Crepuscular;
+			name = Twilight;
 			productName = Crepuscular;
-			productReference = 4DF10BC91D6FD53700F2F183 /* Crepuscular.app */;
+			productReference = 4DF10BC91D6FD53700F2F183 /* Twilight.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -163,7 +163,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4DF10BC41D6FD53700F2F183 /* Build configuration list for PBXProject "Crepuscular" */;
+			buildConfigurationList = 4DF10BC41D6FD53700F2F183 /* Build configuration list for PBXProject "Twilight" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -176,7 +176,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4DF10BC81D6FD53700F2F183 /* Crepuscular */,
+				4DF10BC81D6FD53700F2F183 /* Twilight */,
 			);
 		};
 /* End PBXProject section */
@@ -376,9 +376,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = Crepuscular/Info.plist;
+				INFOPLIST_FILE = Twilight/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.markfeldman.Crepuscular;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markfeldman.Twilight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos10.0;
 				SWIFT_VERSION = 3.0;
@@ -392,9 +392,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = Crepuscular/Info.plist;
+				INFOPLIST_FILE = Twilight/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.markfeldman.Crepuscular;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markfeldman.Twilight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos10.0;
 				SWIFT_VERSION = 3.0;
@@ -404,7 +404,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4DF10BC41D6FD53700F2F183 /* Build configuration list for PBXProject "Crepuscular" */ = {
+		4DF10BC41D6FD53700F2F183 /* Build configuration list for PBXProject "Twilight" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4DF10BD91D6FD53700F2F183 /* Debug */,
@@ -413,7 +413,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4DF10BDB1D6FD53700F2F183 /* Build configuration list for PBXNativeTarget "Crepuscular" */ = {
+		4DF10BDB1D6FD53700F2F183 /* Build configuration list for PBXNativeTarget "Twilight" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4DF10BDC1D6FD53700F2F183 /* Debug */,
