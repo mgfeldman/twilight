@@ -3,8 +3,8 @@
 # Uncomment this line if you're using Swift
  use_frameworks!
 
-target 'Crepuscular' do
-    pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :branch => 'swift3'
-    pod 'SwiftLocation', :git => 'https://github.com/malcommac/SwiftLocation.git', :branch => 'feature/swift3'
+target 'Twilight' do
+     pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :branch => 'swift3'
+     # pod 'SwiftLocation', :git => 'https://github.com/malcommac/SwiftLocation.git', :branch => 'feature/swift3'
 end
 

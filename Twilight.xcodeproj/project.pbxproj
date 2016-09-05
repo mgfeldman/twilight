@@ -18,12 +18,12 @@
 		4DF10BD21D6FD53700F2F183 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DF10BD01D6FD53700F2F183 /* Main.storyboard */; };
 		4DF10BD41D6FD53700F2F183 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DF10BD31D6FD53700F2F183 /* Assets.xcassets */; };
 		4DF10BD71D6FD53700F2F183 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DF10BD51D6FD53700F2F183 /* LaunchScreen.storyboard */; };
-		5C2E2A9EEE200A27B2E96D66 /* Pods_Crepuscular.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25745D8E9C2A6FFB2E1BAE30 /* Pods_Crepuscular.framework */; };
+		4F1148BE7CE1786C95A85D88 /* Pods_Twilight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7634CCA2F20482910068814 /* Pods_Twilight.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		25745D8E9C2A6FFB2E1BAE30 /* Pods_Crepuscular.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Crepuscular.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B4617D91667F90476D4BCAB /* Pods-Crepuscular.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Crepuscular.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Crepuscular/Pods-Crepuscular.debug.xcconfig"; sourceTree = "<group>"; };
+		3B4617D91667F90476D4BCAB /* Pods-Twilight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twilight.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Twilight/Pods-Twilight.debug.xcconfig"; sourceTree = "<group>"; };
 		4D10EF4A1D70AAC500FB813E /* LocationServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationServices.swift; sourceTree = "<group>"; };
 		4D534D7B1D70AC4C00ED90DC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4D534D7E1D70E07000ED90DC /* WeatherStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherStation.swift; sourceTree = "<group>"; };
@@ -37,7 +37,8 @@
 		4DF10BD31D6FD53700F2F183 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DF10BD61D6FD53700F2F183 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4DF10BD81D6FD53700F2F183 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B7F6E94FEFC946121DB352F0 /* Pods-Crepuscular.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Crepuscular.release.xcconfig"; path = "Pods/Target Support Files/Pods-Crepuscular/Pods-Crepuscular.release.xcconfig"; sourceTree = "<group>"; };
+		A7634CCA2F20482910068814 /* Pods_Twilight.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Twilight.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7F6E94FEFC946121DB352F0 /* Pods-Twilight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twilight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Twilight/Pods-Twilight.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +47,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D534D7C1D70AC4C00ED90DC /* CoreLocation.framework in Frameworks */,
-				5C2E2A9EEE200A27B2E96D66 /* Pods_Crepuscular.framework in Frameworks */,
+				4F1148BE7CE1786C95A85D88 /* Pods_Twilight.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +59,7 @@
 			children = (
 				4D534D7B1D70AC4C00ED90DC /* CoreLocation.framework */,
 				25745D8E9C2A6FFB2E1BAE30 /* Pods_Crepuscular.framework */,
+				A7634CCA2F20482910068814 /* Pods_Twilight.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -117,8 +119,8 @@
 		F7637C8CC9164CDBC0818364 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4617D91667F90476D4BCAB /* Pods-Crepuscular.debug.xcconfig */,
-				B7F6E94FEFC946121DB352F0 /* Pods-Crepuscular.release.xcconfig */,
+				3B4617D91667F90476D4BCAB /* Pods-Twilight.debug.xcconfig */,
+				B7F6E94FEFC946121DB352F0 /* Pods-Twilight.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -222,7 +224,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Crepuscular/Pods-Crepuscular-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Twilight/Pods-Twilight-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D74C74004BE9CDAFFF49BB7D /* Copy Pods Resources */ = {
@@ -237,7 +239,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Crepuscular/Pods-Crepuscular-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Twilight/Pods-Twilight-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -371,7 +373,7 @@
 		};
 		4DF10BDC1D6FD53700F2F183 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4617D91667F90476D4BCAB /* Pods-Crepuscular.debug.xcconfig */;
+			baseConfigurationReference = 3B4617D91667F90476D4BCAB /* Pods-Twilight.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -380,14 +382,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.markfeldman.Twilight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos10.0;
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		4DF10BDD1D6FD53700F2F183 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7F6E94FEFC946121DB352F0 /* Pods-Crepuscular.release.xcconfig */;
+			baseConfigurationReference = B7F6E94FEFC946121DB352F0 /* Pods-Twilight.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -396,7 +398,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.markfeldman.Twilight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos10.0;
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
