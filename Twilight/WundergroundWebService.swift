@@ -60,20 +60,33 @@ class WundergroundWebService: NSObject, LocationServicesDelegate {
             print(dictionary)
         }
         
-        let serviceString = formURLStringRequest(withFeatures: .geolookup, useIpAddress: false)
+        let serviceString = formURLStringRequest(withFeatures: .geolookup, .conditions, useIpAddress: false)
         retrieveData(serviceString: serviceString, success: success, failure: failure)
     }
     
     func parseFeatureResponses(dictionary : [String : Any]) {
         let responseDict = dictionary["response"] as! [String : Any]
         let responseFeatures = responseDict["features"] as! [String : Int]
+        
+        // If response contains geolookup, parse the information
         if responseFeatures[FeatureParams.geolookup.stringValue] == 1 {
             do {
                 let location = try Location(withDict: dictionary["location"] as! [String : Any])
                 print("Updated Location to ", location.city)
                 notifyLocationInformationChanged(updatedLocation: location)
             } catch {
-                
+                print("Failed to create location out of response")
+            }
+        }
+        
+        // If response contains conditions, parse the information
+        if responseFeatures[FeatureParams.conditions.stringValue] == 1 {
+            do {
+                let conditions = try CurrentObservation(withDict: dictionary["current_observation"] as! [String : Any])
+                print("Conditions in the current location are ", conditions.weatherDescription)
+//                notifyLocationInformationChanged(updatedLocation: location)
+            } catch {
+                print("Failed to create current observation out of response")
             }
         }
     }

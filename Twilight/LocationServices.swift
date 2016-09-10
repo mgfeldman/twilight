@@ -8,12 +8,13 @@
 
 import UIKit
 import CoreLocation
+import SwiftLocation
 
 protocol LocationServicesDelegate {
     func locationChanged(currentLocation : CoordinateLocation)
 }
 
-class LocationServices: NSObject, CLLocationManagerDelegate {
+class LocationServices: NSObject {
     
     static let shared = LocationServices()
     private var currentLocation : CoordinateLocation?
@@ -25,7 +26,7 @@ class LocationServices: NSObject, CLLocationManagerDelegate {
         super.init()
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
-              locationManager.delegate = self
+//            locationManager.delegate = self
         }
     }
     
@@ -38,31 +39,36 @@ class LocationServices: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = manager.location else { return }
-        setCurrentLocation(location: location)
+//        guard let location = manager.location else { return }
+//        setCurrentLocation(location: location)
     }
+//
+//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+//        print("Getting location failed with error \(error.localizedDescription)")
+//    }
     
     func getCurrentLocationCoordinateString() -> String? {
         return currentLocation?.coordinateString
     }
     
     func getLocation() {
+//        locationManager.requestLocation()
         
-        
-        
-//        _ = SwiftLocation.Location.getLocation(withAccuracy: .block, frequency: .byDistanceIntervals(meters: 5.0), timeout: 50, onSuccess: { (location) in
-//            
-//            self.setCurrentLocation(location: location)
-//            
-//        }) { (lastValidLocation, error) in
-//            print("Error occurred getting location: \(error.description)")
-//            self.setCurrentLocation(location: lastValidLocation)
-//        }
+        _ = SwiftLocation.Location.getLocation(withAccuracy: .block, frequency: .byDistanceIntervals(meters: 5.0), timeout: 50, onSuccess: { (location) in
+            
+            self.setCurrentLocation(location: location)
+            
+        }) { (lastValidLocation, error) in
+            print("Error occurred getting location: \(error.description)")
+            if lastValidLocation != nil {
+                self.setCurrentLocation(location: lastValidLocation!)
+            }
+        }
         
         
     }
     
-    func setCurrentLocation(location : CLLocation) {
+    private func setCurrentLocation(location : CLLocation) {
         
         let latitude = String(location.coordinate.latitude)
         let longitude = String(location.coordinate.longitude)
