@@ -24,6 +24,10 @@ let locationNeighborhoodKey = "neighborhood"
 let locationIdKey = "id"
 let locationStationKey = "station"
 
+enum SerializationError: Error {
+    case missing
+    case invalid
+}
 class Location: NSObject {
     
     var type : String?
@@ -42,25 +46,26 @@ class Location: NSObject {
     ///
     /// - parameter dictionary: The "location" dictionary.
     /// - throws: JSONParsingError.InvalidPayload if dictionary is missing fields.
-    init(withDict dictionary: Dictionary<String, Any>) throws {
+    init(withDict json: [String : Any]) throws {
         
         var longitudeKey = locationLongitudeKey
         var latitudeKey = locationLatitudeKey
         
         // Some responses have "longitude/latitude" instead of "lon/lat" -_-
-        if dictionary.keys.contains(where: {$0 == "latitude"}) {
+        if json.keys.contains(where: {$0 == "latitude"}) {
             longitudeKey = "latitude"
             latitudeKey = "longitude"
         }
 
-        guard let country = dictionary[locationCountryKey],
-            let countryISO3166 = dictionary[locationCountryISO3116Key],
-            let state = dictionary[locationStateKey],
-            let city = dictionary[locationCityKey],
-            let lat = dictionary[latitudeKey],
-            let lon =  dictionary[longitudeKey] else {
+        // These fields are shared by all members of Location
+        guard let country = json[locationCountryKey],
+            let countryISO3166 = json[locationCountryISO3116Key],
+            let state = json[locationStateKey],
+            let city = json[locationCityKey],
+            let lat = json[latitudeKey],
+            let lon =  json[longitudeKey] else {
                 
-                throw JSONParsingError.InvalidPayload
+                throw SerializationError.missing
         }
 
         self.country = country as! String
@@ -69,32 +74,16 @@ class Location: NSObject {
         self.city = city as! String
         self.coordinates = CoordinateLocation(latitude: lat as! String, longitude: lon as! String)
         
-        if let countryName = dictionary[locationCountryNameKey] {
-            self.countryName = countryName as? String
-        }
-        
-        if let zip = dictionary[locationZipKey] {
-            self.zip = zip as? String
-        }
-        
-        if let elevation = dictionary["elevation"] {
-            self.coordinates.elevation = elevation as? String
-        }
-        
-        if let wuiURL = dictionary[locationWuiURLKey] {
-            self.wuiURL = wuiURL as? String
-        }
-        
-        if let timeZoneShort = dictionary[locationTimeZoneShortKey] {
-            self.timeZoneShort = timeZoneShort as? String
-        }
-        
-        if let type = dictionary[locationTypeKey] {
-            self.type = type as? String
-        }
+        // optional fields
+        self.countryName = json[locationCountryNameKey] as? String
+        self.zip = json[locationZipKey] as? String
+        self.coordinates.elevation = json["elevation"] as? String
+        self.wuiURL = json[locationWuiURLKey] as? String
+        self.timeZoneShort = json[locationTimeZoneShortKey] as? String
+        self.type = json[locationTypeKey] as? String
         
         // TODO: Figure out how to separate this out and avoid the reference to 'self' issue
-        if let nearbyStations = dictionary[locationNearbyWeatherStationsKey] as? Dictionary<String, Any> {
+        if let nearbyStations = json[locationNearbyWeatherStationsKey] as? [String : Any] {
             if let airportStations = nearbyStations[WeatherStationType.airport.rawValue] as? [String : Any] {
                 if let stations = airportStations[locationStationKey] as? [[String : String]] {
                     for station in stations {

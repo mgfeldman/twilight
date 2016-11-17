@@ -17,8 +17,7 @@ protocol LocationServicesDelegate {
 class LocationServices: NSObject {
     
     static let shared = LocationServices()
-    private var currentLocation : CoordinateLocation?
-    
+    private var currentLocation : CoordinateLocation?    
     let locationManager = CLLocationManager()
     var delegates = [LocationServicesDelegate]()
     
@@ -28,6 +27,7 @@ class LocationServices: NSObject {
         if CLLocationManager.locationServicesEnabled() {
 //            locationManager.delegate = self
         }
+//        setUpLocationTracking()
     }
     
     deinit {
@@ -54,7 +54,7 @@ class LocationServices: NSObject {
     func getLocation() {
 //        locationManager.requestLocation()
         
-        _ = SwiftLocation.Location.getLocation(withAccuracy: .block, frequency: .byDistanceIntervals(meters: 5.0), timeout: 50, onSuccess: { (location) in
+        _ = SwiftLocation.Location.getLocation(withAccuracy: .block, frequency: .byDistanceIntervals(meters: 50.0), timeout: 50, onSuccess: { (location) in
             
             self.setCurrentLocation(location: location)
             
@@ -64,8 +64,6 @@ class LocationServices: NSObject {
                 self.setCurrentLocation(location: lastValidLocation!)
             }
         }
-        
-        
     }
     
     private func setCurrentLocation(location : CLLocation) {

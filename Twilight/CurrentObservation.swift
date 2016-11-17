@@ -40,6 +40,8 @@ class CurrentObservation: NSObject {
     var feelsLikeC : String
     var iconURL : String
     
+    var displayableWeatherString : String
+    
     init(withDict dictionary : [String : Any]) throws {
         
         guard let observationLocation = dictionary[observationLocationKey],
@@ -58,7 +60,7 @@ class CurrentObservation: NSObject {
             let iconURL =  dictionary[iconURLKey] as? String
             else {
                 
-                throw JSONParsingError.InvalidPayload
+                throw SerializationError.missing
         }
         
         
@@ -77,6 +79,7 @@ class CurrentObservation: NSObject {
         self.feelsLikeC = feelsLikeC
         self.iconURL = iconURL
         
+        self.displayableWeatherString = String(Int(round(self.temperatureF))) + "˚"
     }
     
 }

@@ -23,7 +23,7 @@ class WeatherStation : NSObject {
         
         guard let city = dictionary[locationCityKey], let state = dictionary[locationStateKey],
             let country = dictionary[locationCountryKey] else {
-                throw JSONParsingError.InvalidPayload
+                throw SerializationError.missing
         }
         
         self.city = city as! String
@@ -43,7 +43,7 @@ class PersonalWeatherStation : WeatherStation {
         do {
             
             guard let neighborhood = dictionary[locationNeighborhoodKey], let id = dictionary[locationIdKey], let distanceKm = dictionary["distance_km"], let distanceMile = dictionary["distance_mi"] else {
-                throw JSONParsingError.InvalidPayload
+                throw SerializationError.missing
             }
             
             self.neighborhood = neighborhood as! String
@@ -65,7 +65,7 @@ class AirportWeatherStation : WeatherStation {
         do {
             
             guard let icao = dictionary["icao"], let lat = dictionary[locationLatitudeKey], let lon = dictionary[locationLongitudeKey] else {
-                throw JSONParsingError.InvalidPayload
+                throw SerializationError.missing
             }
             
             self.icao = icao as! String

@@ -4,7 +4,7 @@
  use_frameworks!
 
 target 'Twilight' do
-     pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :branch => 'swift3'
-    pod 'SwiftLocation', :git => 'https://github.com/malcommac/SwiftLocation.git', :branch => 'swift-3.0'
+     pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git'
+    pod 'SwiftLocation', :git => 'https://github.com/malcommac/SwiftLocation.git'
 end
 

@@ -1,29 +1,29 @@
 PODS:
-  - Alamofire (4.0.0-beta.2)
-  - SwiftLocation (1.0.4)
+  - Alamofire (4.1.0)
+  - SwiftLocation (1.1.0)
 
 DEPENDENCIES:
-  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, branch `swift3`)
-  - SwiftLocation (from `https://github.com/malcommac/SwiftLocation.git`, branch `swift-3.0`)
+  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`)
+  - SwiftLocation (from `https://github.com/malcommac/SwiftLocation.git`)
 
 EXTERNAL SOURCES:
   Alamofire:
-    :branch: swift3
     :git: https://github.com/Alamofire/Alamofire.git
   SwiftLocation:
-    :branch: swift-3.0
     :git: https://github.com/malcommac/SwiftLocation.git
 
 CHECKOUT OPTIONS:
   Alamofire:
-    :commit: a78137ab4559f37219d6b2825552eea5462e4272
+    :commit: c2134d7645ee6869298dc8d3587e580a3ec83f96
     :git: https://github.com/Alamofire/Alamofire.git
   SwiftLocation:
-    :commit: fa300f25fe93b9e8c8ae7eae1c510f5b6751e2f0
+    :commit: 07fbd2052f037460c1daa1767254bd1080f0c45d
     :git: https://github.com/malcommac/SwiftLocation.git
 
 SPEC CHECKSUMS:
-  Alamofire: 7f837be535fe424db2b87d9117f13836939719ca
-  SwiftLocation: 00682ad3598aa54936f34ec42ed53fceb37c22a4
+  Alamofire: e266cf991b933498df791e645e0d8ac294492153
+  SwiftLocation: f1bf5acb7992dd96c6f773c383f9c0479f07727d
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 562fdf603bc63c088cf49dc7ca40d6d10b22f7db
+
+COCOAPODS: 1.1.1

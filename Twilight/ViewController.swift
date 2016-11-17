@@ -10,10 +10,11 @@ import UIKit
 
 class ViewController: UIViewController, WundergroundInformationDelegate {
 
-    @IBOutlet weak var zipLabel: UILabel!
-    @IBOutlet weak var countryLabel: UILabel!
+    @IBOutlet weak var observationLocation: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var currentTemperatureLabel: UILabel!
     
+    @IBOutlet weak var descriptionLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         WundergroundWebService.shared.subscribe(delegate: self)
@@ -21,14 +22,20 @@ class ViewController: UIViewController, WundergroundInformationDelegate {
     
     func updateView(location : Location) {
         DispatchQueue.main.async {
-            self.cityLabel.text = location.city
-            self.countryLabel.text = location.country
-            self.zipLabel.text = location.zip
+            self.cityLabel.text = location.city + ", " + location.state
         }
     }
     
     func locationInformationUpdated(location: Location) {
         updateView(location: location)
+    }
+    
+    func conditionsInformationUpdated(conditions: CurrentObservation) {
+        DispatchQueue.main.async {
+            self.currentTemperatureLabel.text = conditions.displayableWeatherString
+            self.observationLocation.text = conditions.observationLocation.city
+            self.descriptionLabel.text = conditions.weatherDescription
+        }
     }
     
     @IBAction func btnPressed(_ sender: AnyObject) {

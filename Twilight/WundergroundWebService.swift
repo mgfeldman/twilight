@@ -30,6 +30,7 @@ public enum FeatureParams : String {
 }
 protocol WundergroundInformationDelegate {
     func locationInformationUpdated(location : Location)
+    func conditionsInformationUpdated(conditions : CurrentObservation)
 }
 
 class WundergroundWebService: NSObject, LocationServicesDelegate {
@@ -85,6 +86,7 @@ class WundergroundWebService: NSObject, LocationServicesDelegate {
                 let conditions = try CurrentObservation(withDict: dictionary["current_observation"] as! [String : Any])
                 print("Conditions in the current location are ", conditions.weatherDescription)
 //                notifyLocationInformationChanged(updatedLocation: location)
+                notifyConditionsInformationChanged(condition: conditions)
             } catch {
                 print("Failed to create current observation out of response")
             }
@@ -98,7 +100,7 @@ class WundergroundWebService: NSObject, LocationServicesDelegate {
 //            return
 //        }
         
-        Alamofire.request(serviceString, withMethod: .get)
+        Alamofire.request(serviceString)
             .validate()
             .responseData { response in
                 
@@ -150,8 +152,10 @@ class WundergroundWebService: NSObject, LocationServicesDelegate {
             delegate.locationInformationUpdated(location: updatedLocation)
         }
     }
-}
-
-enum JSONParsingError: Error {
-    case InvalidPayload
+    
+    private func notifyConditionsInformationChanged(condition : CurrentObservation) {
+        for delegate in delegates {
+            delegate.conditionsInformationUpdated(conditions: condition)
+        }
+    }
 }
