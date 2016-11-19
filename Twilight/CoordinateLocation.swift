@@ -9,9 +9,9 @@
 import UIKit
 
 struct CoordinateLocation {
-    var latitude : String?
-    var longitude : String?
-    var elevation : String?
+    var latitude: String?
+    var longitude: String?
+    var elevation: String?
     var coordinateString : String? {
         get {
             if self.latitude == nil || self.longitude == nil {

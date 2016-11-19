@@ -25,20 +25,20 @@ var iconURLKey = "icon_url"
 
 class CurrentObservation: NSObject {
 
-    var observationLocation : ObservationLocation
-    var displayLocation : DisplayLocation
-    var stationID : String
-    var observationTime : String
-    var observationEpoch : String
-    var weatherDescription : String
-    var temperatureString : String
-    var temperatureF : Double
-    var temperatureC : Double
-    var relativeHumidity : String
-    var windDescription : String
-    var feelsLikeF : String
-    var feelsLikeC : String
-    var iconURL : String
+    var observationLocation: ObservationLocation
+    var displayLocation: DisplayLocation
+    var stationID: String
+    var observationTime: String
+    var observationEpoch: String
+    var weatherDescription: String
+    var temperatureString: String
+    var temperatureF: Double
+    var temperatureC: Double
+    var relativeHumidity: String
+    var windDescription: String
+    var feelsLikeF: String
+    var feelsLikeC: String
+    var iconURL: String
     
     var displayableWeatherString : String
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, WundergroundInformationDelegate {
+class ViewController: UIViewController, WUInformationDelegate {
 
     @IBOutlet weak var observationLocation: UILabel!
     @IBOutlet weak var cityLabel: UILabel!

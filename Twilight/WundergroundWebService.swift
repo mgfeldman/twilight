@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-public enum FeatureParams : String {
+public enum WUFeatureType : String {
     case conditions    = "conditions"
     case geolookup     = "geolookup"
     case forecast      = "forecast"
@@ -28,7 +28,7 @@ public enum FeatureParams : String {
         return self.rawValue
     }
 }
-protocol WundergroundInformationDelegate {
+protocol WUInformationDelegate {
     func locationInformationUpdated(location : Location)
     func conditionsInformationUpdated(conditions : CurrentObservation)
 }
@@ -37,7 +37,7 @@ class WundergroundWebService: NSObject, LocationServicesDelegate {
     static let shared = WundergroundWebService()
     let apiKey = "005ecab154b1d3ca"
     let baseURL = "http://api.wunderground.com/api/"
-    private var delegates = [WundergroundInformationDelegate]()
+    private var delegates = [WUInformationDelegate]()
     
     override init() {
         super.init()
@@ -48,7 +48,7 @@ class WundergroundWebService: NSObject, LocationServicesDelegate {
         delegates.removeAll()
     }
     
-    func subscribe(delegate : WundergroundInformationDelegate) {
+    func subscribe(delegate : WUInformationDelegate) {
         delegates.append(delegate)
     }
     
@@ -61,16 +61,18 @@ class WundergroundWebService: NSObject, LocationServicesDelegate {
             print(dictionary)
         }
         
-        let serviceString = formURLStringRequest(withFeatures: .geolookup, .conditions, useIpAddress: false)
-        retrieveData(serviceString: serviceString, success: success, failure: failure)
+        WUUpdater.update(withFeatures: .geolookup, .conditions,
+               useIpAddress: true,
+               success: success,
+               failure: failure)
     }
     
-    func parseFeatureResponses(dictionary : [String : Any]) {
+    fileprivate func parseFeatureResponses(dictionary : [String : Any]) {
         let responseDict = dictionary["response"] as! [String : Any]
         let responseFeatures = responseDict["features"] as! [String : Int]
         
         // If response contains geolookup, parse the information
-        if responseFeatures[FeatureParams.geolookup.stringValue] == 1 {
+        if responseFeatures[WUFeatureType.geolookup.stringValue] == 1 {
             do {
                 let location = try Location(withDict: dictionary["location"] as! [String : Any])
                 print("Updated Location to ", location.city)
@@ -81,7 +83,7 @@ class WundergroundWebService: NSObject, LocationServicesDelegate {
         }
         
         // If response contains conditions, parse the information
-        if responseFeatures[FeatureParams.conditions.stringValue] == 1 {
+        if responseFeatures[WUFeatureType.conditions.stringValue] == 1 {
             do {
                 let conditions = try CurrentObservation(withDict: dictionary["current_observation"] as! [String : Any])
                 print("Conditions in the current location are ", conditions.weatherDescription)
@@ -93,7 +95,7 @@ class WundergroundWebService: NSObject, LocationServicesDelegate {
         }
     }
     
-    func retrieveData(serviceString : String, success: @escaping (Dictionary<String, Any>) -> Void, failure: @escaping (String) -> Void) {
+    func retrieveData(serviceString : String, success: @escaping ([String: Any]) -> Void, failure: @escaping (String) -> Void) {
         
 //        if let cached = UserDefaults.standard.object(forKey: "cachedJSONTest") as? [String : Any] {
 //            success(cached)
@@ -121,16 +123,13 @@ class WundergroundWebService: NSObject, LocationServicesDelegate {
         
     }
     
-    func formURLStringRequest(withFeatures features: FeatureParams..., useIpAddress : Bool) -> String {
+    func formURLStringRequest(withFeatures features: [WUFeatureType], useIpAddress : Bool) -> String {
         var urlWithParams = baseURL + apiKey + "/"
+
+        // appends "/" to features and removes any duplicate features
+        let formattedFeatures = Array(Set(features.map({$0.stringValue + "/"})))
         
-        // appends "/" to features
-        let formattedFeatures = features.map({$0.stringValue + "/"})
-        
-        // removes any duplicate features
-        let uniqueFeatures = Array(Set(formattedFeatures))
-        
-        for feature in uniqueFeatures {
+        for feature in formattedFeatures {
             urlWithParams += feature
         }
         
@@ -147,13 +146,13 @@ class WundergroundWebService: NSObject, LocationServicesDelegate {
         return urlWithParams
     }
     
-    private func notifyLocationInformationChanged(updatedLocation : Location) {
+    fileprivate func notifyLocationInformationChanged(updatedLocation : Location) {
         for delegate in delegates {
             delegate.locationInformationUpdated(location: updatedLocation)
         }
     }
     
-    private func notifyConditionsInformationChanged(condition : CurrentObservation) {
+    fileprivate func notifyConditionsInformationChanged(condition : CurrentObservation) {
         for delegate in delegates {
             delegate.conditionsInformationUpdated(conditions: condition)
         }

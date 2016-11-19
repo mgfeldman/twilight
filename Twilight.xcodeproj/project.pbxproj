@@ -14,6 +14,7 @@
 		4D534D831D70E0D300ED90DC /* CoordinateLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D534D821D70E0D300ED90DC /* CoordinateLocation.swift */; };
 		4D534D861D70E51100ED90DC /* WundergroundWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D534D851D70E51100ED90DC /* WundergroundWebService.swift */; };
 		4DB8951F1D8467200006D6A0 /* CurrentObservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB8951E1D8467200006D6A0 /* CurrentObservation.swift */; };
+		4DE0C1931DE0FAE000F9534B /* WUUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE0C1921DE0FAE000F9534B /* WUUpdater.swift */; };
 		4DF10BCD1D6FD53700F2F183 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF10BCC1D6FD53700F2F183 /* AppDelegate.swift */; };
 		4DF10BCF1D6FD53700F2F183 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF10BCE1D6FD53700F2F183 /* ViewController.swift */; };
 		4DF10BD21D6FD53700F2F183 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DF10BD01D6FD53700F2F183 /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 		4D534D821D70E0D300ED90DC /* CoordinateLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinateLocation.swift; sourceTree = "<group>"; };
 		4D534D851D70E51100ED90DC /* WundergroundWebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WundergroundWebService.swift; sourceTree = "<group>"; };
 		4DB8951E1D8467200006D6A0 /* CurrentObservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentObservation.swift; sourceTree = "<group>"; };
+		4DE0C1921DE0FAE000F9534B /* WUUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WUUpdater.swift; sourceTree = "<group>"; };
 		4DF10BC91D6FD53700F2F183 /* Twilight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twilight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DF10BCC1D6FD53700F2F183 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DF10BCE1D6FD53700F2F183 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				4D534D851D70E51100ED90DC /* WundergroundWebService.swift */,
+				4DE0C1921DE0FAE000F9534B /* WUUpdater.swift */,
 			);
 			name = Api;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				4DB8951F1D8467200006D6A0 /* CurrentObservation.swift in Sources */,
 				4DF10BCF1D6FD53700F2F183 /* ViewController.swift in Sources */,
 				4D534D7F1D70E07000ED90DC /* WeatherStation.swift in Sources */,
+				4DE0C1931DE0FAE000F9534B /* WUUpdater.swift in Sources */,
 				4D534D811D70E0A500ED90DC /* Location.swift in Sources */,
 				4D10EF4B1D70AAC500FB813E /* LocationServices.swift in Sources */,
 				4DF10BCD1D6FD53700F2F183 /* AppDelegate.swift in Sources */,

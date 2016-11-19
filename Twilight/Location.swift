@@ -8,48 +8,53 @@
 
 import UIKit
 
-let locationTypeKey = "type"
-let locationCountryKey = "country"
-let locationCountryISO3116Key = "country_iso3166"
-let locationCountryNameKey = "country_name"
-let locationStateKey = "state"
-let locationCityKey = "city"
-let locationTimeZoneShortKey = "tz_short"
-let locationLatitudeKey = "lat"
-let locationLongitudeKey = "lon"
-let locationZipKey = "zip"
-let locationWuiURLKey = "wuiurl"
-let locationNearbyWeatherStationsKey = "nearby_weather_stations"
-let locationNeighborhoodKey = "neighborhood"
-let locationIdKey = "id"
-let locationStationKey = "station"
+enum LocationKey {
+    
+    static let type             = "type"
+    static let country          = "country"
+    static let countryIso3166   = "country_iso3166"
+    static let countryName      = "country_name"
+    static let state            = "state"
+    static let city             = "city"
+    static let timeZone         = "tz_short"
+    static let lat              = "lat"
+    static let lon              = "lon"
+    static let elevation        = "elevation"
+    static let zip              = "zip"
+    static let wuiurl           = "wuiurl"
+    static let nearbyStations   = "nearby_weather_stations"
+    static let neighborhood     = "neighborhood"
+    static let id               = "id"
+    static let station          = "station"
+}
 
 enum SerializationError: Error {
     case missing
     case invalid
 }
+
 class Location: NSObject {
     
-    var type : String?
-    var country : String
-    var countryISO3166 : String
-    var countryName : String?
-    var state : String
-    var city : String
-    var timeZoneShort : String?
-    var coordinates : CoordinateLocation
-    var zip : String?
-    var wuiURL : String?
+    var type: String?
+    var country: String
+    var countryISO3166: String
+    var countryName: String?
+    var state: String
+    var city: String
+    var timeZoneShort: String?
+    var coordinates: CoordinateLocation
+    var zip: String?
+    var wuiURL: String?
     var nearbyWeatherStations = [WeatherStation]()
     
     /// Creates an instance from the "location" response.
     ///
-    /// - parameter dictionary: The "location" dictionary.
+    /// - parameter json: The `location` dictionary.
     /// - throws: JSONParsingError.InvalidPayload if dictionary is missing fields.
     init(withDict json: [String : Any]) throws {
         
-        var longitudeKey = locationLongitudeKey
-        var latitudeKey = locationLatitudeKey
+        var longitudeKey = LocationKey.lon
+        var latitudeKey = LocationKey.lat
         
         // Some responses have "longitude/latitude" instead of "lon/lat" -_-
         if json.keys.contains(where: {$0 == "latitude"}) {
@@ -58,65 +63,58 @@ class Location: NSObject {
         }
 
         // These fields are shared by all members of Location
-        guard let country = json[locationCountryKey],
-            let countryISO3166 = json[locationCountryISO3116Key],
-            let state = json[locationStateKey],
-            let city = json[locationCityKey],
-            let lat = json[latitudeKey],
-            let lon =  json[longitudeKey] else {
-                
+        guard let country = json[LocationKey.country] as? String,
+            let countryISO3166 = json[LocationKey.countryIso3166] as? String,
+            let state = json[LocationKey.state] as? String,
+            let city = json[LocationKey.city] as? String,
+            let lat = json[latitudeKey] as? String,
+            let lon =  json[longitudeKey] as? String else {
                 throw SerializationError.missing
         }
 
-        self.country = country as! String
-        self.countryISO3166 = countryISO3166 as! String
-        self.state = state as! String
-        self.city = city as! String
-        self.coordinates = CoordinateLocation(latitude: lat as! String, longitude: lon as! String)
+        self.country = country
+        self.countryISO3166 = countryISO3166
+        self.state = state
+        self.city = city
+        self.coordinates = CoordinateLocation(latitude: lat, longitude: lon)
         
         // optional fields
-        self.countryName = json[locationCountryNameKey] as? String
-        self.zip = json[locationZipKey] as? String
-        self.coordinates.elevation = json["elevation"] as? String
-        self.wuiURL = json[locationWuiURLKey] as? String
-        self.timeZoneShort = json[locationTimeZoneShortKey] as? String
-        self.type = json[locationTypeKey] as? String
+        self.countryName = json[LocationKey.countryName] as? String
+        self.zip = json[LocationKey.zip] as? String
+        self.coordinates.elevation = json[LocationKey.elevation] as? String
+        self.wuiURL = json[LocationKey.wuiurl] as? String
+        self.timeZoneShort = json[LocationKey.timeZone] as? String
+        self.type = json[LocationKey.type] as? String
         
-        // TODO: Figure out how to separate this out and avoid the reference to 'self' issue
-        if let nearbyStations = json[locationNearbyWeatherStationsKey] as? [String : Any] {
-            if let airportStations = nearbyStations[WeatherStationType.airport.rawValue] as? [String : Any] {
-                if let stations = airportStations[locationStationKey] as? [[String : String]] {
-                    for station in stations {
-                        do {
-                            let airportStation = try AirportWeatherStation(withDict: station)
-                            nearbyWeatherStations.append(airportStation)
-                        } catch {
-                            print("Error creating AirportWeatherStation.")
-                        }
-                    }
-                }
+        guard let nearbyStations = json[LocationKey.nearbyStations] as? [String : Any],
+            let airportStations = nearbyStations[WeatherStationType.airport] as? [String : Any],
+            let aStations = airportStations[LocationKey.station] as? [[String : String]] else { return }
+
+        for station in aStations {
+            do {
+                let airportStation = try AirportWeatherStation(withDict: station)
+                nearbyWeatherStations.append(airportStation)
+            } catch {
+                throw SerializationError.invalid
             }
-            
-            if let personalStations = nearbyStations[WeatherStationType.personal.rawValue] as? [String : Any] {
-                if let stations = personalStations[locationStationKey] as? [[String : Any]] {
-                    for station in stations {
-                        do {
-                            let personalStation = try PersonalWeatherStation(withDict: station)
-                            nearbyWeatherStations.append(personalStation)
-                        } catch {
-                            print("Error creating PersonalWeatherStation.")
-                        }
-                        
-                    }
-                }
+        }
+
+        guard let personalStations = nearbyStations[WeatherStationType.personal] as? [String : Any],
+            let pStations = personalStations[LocationKey.station] as? [[String : Any]] else { return }
+        
+        for station in pStations {
+            do {
+                let personalStation = try PersonalWeatherStation(withDict: station)
+                nearbyWeatherStations.append(personalStation)
+            } catch {
+               throw SerializationError.invalid
             }
-            
         }
     }
 }
 
 class ObservationLocation : Location {
-    var full : String
+    var full: String
     
     override init(withDict dictionary : [String : Any]) throws {
         self.full = dictionary["full"] as! String
@@ -125,12 +123,10 @@ class ObservationLocation : Location {
 }
 
 class DisplayLocation : Location {
-    var stateName : String
+    var stateName: String
     
     override init(withDict dictionary : [String : Any]) throws {
         self.stateName = dictionary["state_name"] as! String
         try super.init(withDict: dictionary)
     }
 }
-
-

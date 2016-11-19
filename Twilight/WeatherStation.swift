@@ -8,48 +8,52 @@
 
 import UIKit
 
-enum WeatherStationType : String {
-    case airport = "airport"
-    case personal = "pws"
+enum WeatherStationType {
+    static let airport = "airport"
+    static let personal = "pws"
 }
 
 class WeatherStation : NSObject {
     
-    var city : String
-    var state : String
-    var country : String
+    var city: String
+    var state: String
+    var country: String
     
-    init(withDict dictionary : Dictionary<String, Any>) throws {
+    init(withDict dictionary : [String: Any]) throws {
         
-        guard let city = dictionary[locationCityKey], let state = dictionary[locationStateKey],
-            let country = dictionary[locationCountryKey] else {
+        guard let city = dictionary[LocationKey.city] as? String,
+            let state = dictionary[LocationKey.state] as? String,
+            let country = dictionary[LocationKey.country] as? String else {
                 throw SerializationError.missing
         }
         
-        self.city = city as! String
-        self.state = state as! String
-        self.country = country as! String
+        self.city = city
+        self.state = state
+        self.country = country
     }
     
 }
 
 class PersonalWeatherStation : WeatherStation {
-    var neighborhood : String
-    var id : String
-    var distanceKm : Int
-    var distanceMile : Int
+    var neighborhood: String
+    var id: String
+    var distanceKm: Int
+    var distanceMile: Int
     
-    override init(withDict dictionary : Dictionary<String, Any>) throws {
+    override init(withDict dictionary : [String: Any]) throws {
         do {
             
-            guard let neighborhood = dictionary[locationNeighborhoodKey], let id = dictionary[locationIdKey], let distanceKm = dictionary["distance_km"], let distanceMile = dictionary["distance_mi"] else {
+            guard let neighborhood = dictionary[LocationKey.neighborhood] as? String,
+                let id = dictionary[LocationKey.id] as? String,
+                let distanceKm = dictionary["distance_km"] as? Int,
+                let distanceMile = dictionary["distance_mi"] as? Int else {
                 throw SerializationError.missing
             }
             
-            self.neighborhood = neighborhood as! String
-            self.id = id as! String
-            self.distanceKm = distanceKm as! Int
-            self.distanceMile = distanceMile as! Int
+            self.neighborhood = neighborhood
+            self.id = id
+            self.distanceKm = distanceKm
+            self.distanceMile = distanceMile
             
             try super.init(withDict: dictionary)
         }
@@ -58,18 +62,20 @@ class PersonalWeatherStation : WeatherStation {
 
 class AirportWeatherStation : WeatherStation {
     
-    var icao : String
-    var coordinates : CoordinateLocation
+    var icao: String
+    var coordinates: CoordinateLocation
     
-    override init(withDict dictionary : Dictionary<String, Any>) throws {
+    override init(withDict dictionary : [String: Any]) throws {
         do {
             
-            guard let icao = dictionary["icao"], let lat = dictionary[locationLatitudeKey], let lon = dictionary[locationLongitudeKey] else {
+            guard let icao = dictionary["icao"] as? String,
+                let lat = dictionary[LocationKey.lat] as? String,
+                let lon = dictionary[LocationKey.lon] as? String else {
                 throw SerializationError.missing
             }
             
-            self.icao = icao as! String
-            self.coordinates = CoordinateLocation(latitude: lat as! String, longitude: lon as! String)
+            self.icao = icao
+            self.coordinates = CoordinateLocation(latitude: lat, longitude: lon)
             
             try super.init(withDict: dictionary)
         }
