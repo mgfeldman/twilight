@@ -11,39 +11,46 @@ import UIKit
 class WUUpdater: NSObject {
     
     static let webService = WundergroundWebService.shared
-    let apiKey = "005ecab154b1d3ca"
-    let baseURL = "http://api.wunderground.com/api/"
 
     static func update(withFeatures features: WUFeatureType...,
-        useIpAddress: Bool,
+        withLocation location: CoordinateLocation?,
         success: @escaping ([String : Any]) -> Void,
-        failure: @escaping (String) -> Void) {
-        let serviceString = webService.formURLStringRequest(withFeatures: features,
-                                                            useIpAddress: useIpAddress)
-        webService.retrieveData(serviceString: serviceString, success: success, failure: failure)
+        failure: @escaping (Error?) -> Void) {
+        
+        let request = WURequest(features: features, location: location)
+        
+        webService.retrieveData(request: request,
+                                success: success,
+                                failure: failure)
     }
     
-    static func updateGeoLookup(useIpAddress: Bool,
+    static func updateGeoLookup(withLocation location: CoordinateLocation,
                          success: @escaping ([String : Any]) -> Void,
-                         failure: @escaping (String) -> Void) {
-        let serviceString = webService.formURLStringRequest(withFeatures: [.geolookup],
-                                                             useIpAddress: useIpAddress)
-        webService.retrieveData(serviceString: serviceString, success: success, failure: failure)
+                         failure: @escaping (Error?) -> Void) {
+        
+        self.update(withFeatures: .geolookup,
+                    withLocation: location,
+                    success: success,
+                    failure: failure)
     }
     
-    static func updateConditions(useIpAddress: Bool,
+    static func updateConditions(withLocation location: CoordinateLocation,
                           success: @escaping ([String : Any]) -> Void,
-                          failure: @escaping (String) -> Void) {
-        let serviceString = webService.formURLStringRequest(withFeatures: [.conditions],
-                                                            useIpAddress: useIpAddress)
-        webService.retrieveData(serviceString: serviceString, success: success, failure: failure)
+                          failure: @escaping (Error?) -> Void) {
+        
+        self.update(withFeatures: .conditions,
+                    withLocation: location,
+                    success: success,
+                    failure: failure)
     }
     
-    static func updateForecast(useIpAddress: Bool,
+    static func updateForecast(withLocation location: CoordinateLocation,
                         success: @escaping ([String : Any]) -> Void,
-                        failure: @escaping (String) -> Void) {
-        let serviceString = webService.formURLStringRequest(withFeatures: [.forecast],
-                                                            useIpAddress: useIpAddress)
-        webService.retrieveData(serviceString: serviceString, success: success, failure: failure)
+                        failure: @escaping (Error?) -> Void) {
+        
+        self.update(withFeatures: .forecast,
+                    withLocation: location,
+                    success: success,
+                    failure: failure)
     }
 }

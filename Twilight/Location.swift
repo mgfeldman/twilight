@@ -46,11 +46,7 @@ class Location: NSObject {
     var zip: String?
     var wuiURL: String?
     var nearbyWeatherStations = [WeatherStation]()
-    
-    /// Creates an instance from the "location" response.
-    ///
-    /// - parameter json: The `location` dictionary.
-    /// - throws: JSONParsingError.InvalidPayload if dictionary is missing fields.
+
     init(withDict json: [String : Any]) throws {
         
         var longitudeKey = LocationKey.lon

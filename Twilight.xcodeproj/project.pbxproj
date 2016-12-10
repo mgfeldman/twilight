@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4D10EF4B1D70AAC500FB813E /* LocationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D10EF4A1D70AAC500FB813E /* LocationServices.swift */; };
+		4D2B26041DFCB56B00AD797F /* TwilightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2B26031DFCB56B00AD797F /* TwilightTests.swift */; };
 		4D534D7C1D70AC4C00ED90DC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D534D7B1D70AC4C00ED90DC /* CoreLocation.framework */; };
 		4D534D7F1D70E07000ED90DC /* WeatherStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D534D7E1D70E07000ED90DC /* WeatherStation.swift */; };
 		4D534D811D70E0A500ED90DC /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D534D801D70E0A500ED90DC /* Location.swift */; };
@@ -23,10 +24,23 @@
 		E69904F1D6B0160DB5BFFC5A /* Pods_Twilight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB448B5E50C01FBDFB23988 /* Pods_Twilight.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		4D2B26061DFCB56B00AD797F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4DF10BC11D6FD53700F2F183 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4DF10BC81D6FD53700F2F183;
+			remoteInfo = Twilight;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		26C26D1614163FB0F6DC68CA /* Pods-Twilight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twilight.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Twilight/Pods-Twilight.debug.xcconfig"; sourceTree = "<group>"; };
 		4AB448B5E50C01FBDFB23988 /* Pods_Twilight.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Twilight.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D10EF4A1D70AAC500FB813E /* LocationServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationServices.swift; sourceTree = "<group>"; };
+		4D2B26011DFCB56B00AD797F /* TwilightTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TwilightTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D2B26031DFCB56B00AD797F /* TwilightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwilightTests.swift; sourceTree = "<group>"; };
+		4D2B26051DFCB56B00AD797F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D534D7B1D70AC4C00ED90DC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4D534D7E1D70E07000ED90DC /* WeatherStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherStation.swift; sourceTree = "<group>"; };
 		4D534D801D70E0A500ED90DC /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -45,6 +59,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4D2B25FE1DFCB56B00AD797F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4DF10BC61D6FD53700F2F183 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -64,6 +85,15 @@
 				4AB448B5E50C01FBDFB23988 /* Pods_Twilight.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4D2B26021DFCB56B00AD797F /* TwilightTests */ = {
+			isa = PBXGroup;
+			children = (
+				4D2B26031DFCB56B00AD797F /* TwilightTests.swift */,
+				4D2B26051DFCB56B00AD797F /* Info.plist */,
+			);
+			path = TwilightTests;
 			sourceTree = "<group>";
 		};
 		4D534D7D1D70E05300ED90DC /* Model */ = {
@@ -90,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				4DF10BCB1D6FD53700F2F183 /* Twilight */,
+				4D2B26021DFCB56B00AD797F /* TwilightTests */,
 				4DF10BCA1D6FD53700F2F183 /* Products */,
 				4ABCEB9CDD4B3C430C6DD708 /* Frameworks */,
 				6C52FAF3F02AAC4877501453 /* Pods */,
@@ -100,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				4DF10BC91D6FD53700F2F183 /* Twilight.app */,
+				4D2B26011DFCB56B00AD797F /* TwilightTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -132,6 +164,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4D2B26001DFCB56B00AD797F /* TwilightTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D2B260A1DFCB56B00AD797F /* Build configuration list for PBXNativeTarget "TwilightTests" */;
+			buildPhases = (
+				4D2B25FD1DFCB56B00AD797F /* Sources */,
+				4D2B25FE1DFCB56B00AD797F /* Frameworks */,
+				4D2B25FF1DFCB56B00AD797F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4D2B26071DFCB56B00AD797F /* PBXTargetDependency */,
+			);
+			name = TwilightTests;
+			productName = TwilightTests;
+			productReference = 4D2B26011DFCB56B00AD797F /* TwilightTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		4DF10BC81D6FD53700F2F183 /* Twilight */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4DF10BDB1D6FD53700F2F183 /* Build configuration list for PBXNativeTarget "Twilight" */;
@@ -158,10 +208,16 @@
 		4DF10BC11D6FD53700F2F183 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Mark Feldman";
 				TargetAttributes = {
+					4D2B26001DFCB56B00AD797F = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 34C7D2P284;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 4DF10BC81D6FD53700F2F183;
+					};
 					4DF10BC81D6FD53700F2F183 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 34C7D2P284;
@@ -183,11 +239,19 @@
 			projectRoot = "";
 			targets = (
 				4DF10BC81D6FD53700F2F183 /* Twilight */,
+				4D2B26001DFCB56B00AD797F /* TwilightTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4D2B25FF1DFCB56B00AD797F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4DF10BC71D6FD53700F2F183 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -249,6 +313,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4D2B25FD1DFCB56B00AD797F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D2B26041DFCB56B00AD797F /* TwilightTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4DF10BC51D6FD53700F2F183 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -266,6 +338,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4D2B26071DFCB56B00AD797F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4DF10BC81D6FD53700F2F183 /* Twilight */;
+			targetProxy = 4D2B26061DFCB56B00AD797F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4DF10BD01D6FD53700F2F183 /* Main.storyboard */ = {
@@ -287,6 +367,41 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4D2B26081DFCB56B00AD797F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = 34C7D2P284;
+				INFOPLIST_FILE = TwilightTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.markfeldman.TwilightTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Twilight.app/Twilight";
+			};
+			name = Debug;
+		};
+		4D2B26091DFCB56B00AD797F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = 34C7D2P284;
+				INFOPLIST_FILE = TwilightTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.markfeldman.TwilightTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Twilight.app/Twilight";
+			};
+			name = Release;
+		};
 		4DF10BD91D6FD53700F2F183 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -412,6 +527,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4D2B260A1DFCB56B00AD797F /* Build configuration list for PBXNativeTarget "TwilightTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D2B26081DFCB56B00AD797F /* Debug */,
+				4D2B26091DFCB56B00AD797F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		4DF10BC41D6FD53700F2F183 /* Build configuration list for PBXProject "Twilight" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

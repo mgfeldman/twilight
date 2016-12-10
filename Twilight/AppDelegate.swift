@@ -7,6 +7,14 @@
 //
 
 import UIKit
+import XCGLogger
+
+let log: XCGLogger = {
+    let log = XCGLogger.default
+    log.setup(level: .debug, showLevel: true, showFileNames: true, showLineNumbers: true, fileLevel: .debug)
+
+    return log
+}()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

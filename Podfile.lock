@@ -1,10 +1,14 @@
 PODS:
   - Alamofire (4.1.0)
   - SwiftLocation (1.1.0)
+  - XCGLogger (4.0.0):
+    - XCGLogger/Core (= 4.0.0)
+  - XCGLogger/Core (4.0.0)
 
 DEPENDENCIES:
   - Alamofire (from `https://github.com/Alamofire/Alamofire.git`)
   - SwiftLocation (from `https://github.com/malcommac/SwiftLocation.git`)
+  - XCGLogger (~> 4.0.0)
 
 EXTERNAL SOURCES:
   Alamofire:
@@ -23,7 +27,8 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: e266cf991b933498df791e645e0d8ac294492153
   SwiftLocation: f1bf5acb7992dd96c6f773c383f9c0479f07727d
+  XCGLogger: 38063ea89b4c8b23232d18efd2e12eb0005f3ea4
 
-PODFILE CHECKSUM: 562fdf603bc63c088cf49dc7ca40d6d10b22f7db
+PODFILE CHECKSUM: 0c6e74d320924dc8f276d3cb7ed546203950ba3e
 
 COCOAPODS: 1.1.1

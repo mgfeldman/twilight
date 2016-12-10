@@ -9,19 +9,19 @@
 import UIKit
 
 let observationLocationKey = "observation_location"
-let displayLocationKey = "display_location"
-let stationIDKey = "station_id"
-let observationTimeKey = "observation_time"
-let observationEpochKey = "observation_epoch"
-let weatherDescriptionKey = "weather"
-let temperatureStringKey = "temperature_string"
-let temperatureFKey = "temp_f"
-let temperatureCKey = "temp_c"
-let relativeHumidityKey = "relative_humidity"
-let windDescriptionKey = "wind_string"
-let feelsLikeFKey = "feelslike_f"
-let feelsLikeCKey = "feelslike_c"
-var iconURLKey = "icon_url"
+let displayLocationKey     = "display_location"
+let stationIDKey           = "station_id"
+let observationTimeKey     = "observation_time"
+let observationEpochKey    = "observation_epoch"
+let weatherDescriptionKey  = "weather"
+let temperatureStringKey   = "temperature_string"
+let temperatureFKey        = "temp_f"
+let temperatureCKey        = "temp_c"
+let relativeHumidityKey    = "relative_humidity"
+let windDescriptionKey     = "wind_string"
+let feelsLikeFKey          = "feelslike_f"
+let feelsLikeCKey          = "feelslike_c"
+var iconURLKey             = "icon_url"
 
 class CurrentObservation: NSObject {
 
@@ -62,7 +62,6 @@ class CurrentObservation: NSObject {
                 
                 throw SerializationError.missing
         }
-        
         
         self.observationLocation = try ObservationLocation(withDict: observationLocation as! [String : Any])
         self.displayLocation = try DisplayLocation(withDict: displayLocation as! [String : Any])

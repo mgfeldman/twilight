@@ -57,12 +57,12 @@ class WundergroundWebService: NSObject, LocationServicesDelegate {
         let success = { (dictionary : [String : Any]) -> Void in
             self.parseFeatureResponses(dictionary: dictionary)
         }
-        let failure = { (dictionary: String) -> Void in
-            print(dictionary)
+        let failure = { (error: Error?) -> Void in
+            log.error(error ?? "No error provided")
         }
         
         WUUpdater.update(withFeatures: .geolookup, .conditions,
-               useIpAddress: true,
+               withLocation: currentLocation,
                success: success,
                failure: failure)
     }
@@ -72,13 +72,13 @@ class WundergroundWebService: NSObject, LocationServicesDelegate {
         let responseFeatures = responseDict["features"] as! [String : Int]
         
         // If response contains geolookup, parse the information
-        if responseFeatures[WUFeatureType.geolookup.stringValue] == 1 {
+        if hasGeoLookup(dictionary: responseFeatures) == true {
             do {
                 let location = try Location(withDict: dictionary["location"] as! [String : Any])
-                print("Updated Location to ", location.city)
+                log.info("Updated Location to \(location.city), \(location.countryName)")
                 notifyLocationInformationChanged(updatedLocation: location)
             } catch {
-                print("Failed to create location out of response")
+                log.error("Failed to create Location out of response.")
             }
         }
         
@@ -86,28 +86,34 @@ class WundergroundWebService: NSObject, LocationServicesDelegate {
         if responseFeatures[WUFeatureType.conditions.stringValue] == 1 {
             do {
                 let conditions = try CurrentObservation(withDict: dictionary["current_observation"] as! [String : Any])
-                print("Conditions in the current location are ", conditions.weatherDescription)
-//                notifyLocationInformationChanged(updatedLocation: location)
+                log.info("Conditions in the current location are \(conditions.weatherDescription)")
                 notifyConditionsInformationChanged(condition: conditions)
             } catch {
-                print("Failed to create current observation out of response")
+                log.error("Failed to create Current Observation out of response.")
             }
         }
     }
     
-    func retrieveData(serviceString : String, success: @escaping ([String: Any]) -> Void, failure: @escaping (String) -> Void) {
+    func retrieveData(request: WURequest, success: @escaping ([String: Any]) -> Void, failure: @escaping (Error?) -> Void) {
         
 //        if let cached = UserDefaults.standard.object(forKey: "cachedJSONTest") as? [String : Any] {
 //            success(cached)
 //            return
 //        }
         
-        Alamofire.request(serviceString)
+        guard let requestString = request.requestString else {
+            failure(nil)
+            return
+        }
+        
+        log.debug("Requesting from \(requestString)")
+
+        Alamofire.request(requestString)
             .validate()
             .responseData { response in
                 
                 guard let data = response.data, response.result.isSuccess == true else {
-                    failure("fail")
+                    failure(response.result.error)
                     return
                 }
                 
@@ -116,36 +122,12 @@ class WundergroundWebService: NSObject, LocationServicesDelegate {
                     success(json)
                     UserDefaults.standard.set(json, forKey: "cachedJSONTest")
                 } catch {
-                    print("Error converting data to JSON object.")
-                    failure("fail")
+                    log.error("Error converting data to JSON object.")
+                    failure(response.result.error)
                 }
         }
-        
     }
-    
-    func formURLStringRequest(withFeatures features: [WUFeatureType], useIpAddress : Bool) -> String {
-        var urlWithParams = baseURL + apiKey + "/"
-
-        // appends "/" to features and removes any duplicate features
-        let formattedFeatures = Array(Set(features.map({$0.stringValue + "/"})))
-        
-        for feature in formattedFeatures {
-            urlWithParams += feature
-        }
-        
-        urlWithParams += "q/"
-        
-        if useIpAddress == false, let currentLocation = LocationServices.shared.getCurrentLocationCoordinateString() {
-            urlWithParams += currentLocation
-        } else {
-            urlWithParams += "autoip/"
-        }
-        
-        urlWithParams += ".json"
-        
-        return urlWithParams
-    }
-    
+      
     fileprivate func notifyLocationInformationChanged(updatedLocation : Location) {
         for delegate in delegates {
             delegate.locationInformationUpdated(location: updatedLocation)
@@ -156,5 +138,62 @@ class WundergroundWebService: NSObject, LocationServicesDelegate {
         for delegate in delegates {
             delegate.conditionsInformationUpdated(conditions: condition)
         }
+    }
+    
+    fileprivate func hasGeoLookup(dictionary: [String: Int]) -> Bool {
+        return dictionary[WUFeatureType.geolookup.stringValue] == 1
+    }
+    
+}
+
+public struct WURequest {
+    let apiKey = "005ecab154b1d3ca"
+    let baseURL = "http://api.wunderground.com/api/"
+    var features: [WUFeatureType]
+    private var useIpAddress: Bool
+    var location: CoordinateLocation?
+    var requestString: String? {
+        get {
+            return formURLStringRequest()
+        }
+    }
+    
+    init(features: [WUFeatureType], location: CoordinateLocation?) {
+        self.features = features
+        self.location = location
+        if location == nil {
+            self.useIpAddress = true
+        } else {
+            self.useIpAddress = false
+        }
+    }
+    
+    private func formURLStringRequest() -> String? {
+        
+        guard (useIpAddress == true || location?.coordinateString != nil) &&
+            features.isEmpty == false else {
+                return nil
+        }
+        
+        var urlWithParams = baseURL + apiKey + "/"
+        
+        // appends "/" to features and removes any duplicate features
+        let formattedFeatures = Array(Set(features.map({$0.stringValue + "/"})))
+        
+        for feature in formattedFeatures {
+            urlWithParams += feature
+        }
+        
+        urlWithParams += "q/"
+        
+        if useIpAddress == false {
+            urlWithParams += location!.coordinateString!
+        } else {
+            urlWithParams += "autoip/"
+        }
+        
+        urlWithParams += ".json"
+        
+        return urlWithParams
     }
 }

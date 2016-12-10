@@ -59,7 +59,7 @@ class LocationServices: NSObject {
             self.setCurrentLocation(location: location)
             
         }) { (lastValidLocation, error) in
-            print("Error occurred getting location: \(error.description)")
+            log.error("Error occurred getting location: \(error.description)")
             if lastValidLocation != nil {
                 self.setCurrentLocation(location: lastValidLocation!)
             }
