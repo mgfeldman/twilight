@@ -18,18 +18,23 @@ class WeatherStation : NSObject {
     var city: String
     var state: String
     var country: String
+    var coordinates: CoordinateLocation
+    
     
     init(withDict dictionary : [String: Any]) throws {
         
         guard let city = dictionary[LocationKey.city] as? String,
             let state = dictionary[LocationKey.state] as? String,
-            let country = dictionary[LocationKey.country] as? String else {
+            let country = dictionary[LocationKey.country] as? String,
+            let lat = dictionary[LocationKey.lat],
+            let lon = dictionary[LocationKey.lon] else {
                 throw SerializationError.missing
         }
         
         self.city = city
         self.state = state
         self.country = country
+        self.coordinates = CoordinateLocation(latitude: String(describing: lat), longitude: String(describing: lon))
     }
     
 }
@@ -39,7 +44,7 @@ class PersonalWeatherStation : WeatherStation {
     var id: String
     var distanceKm: Int
     var distanceMile: Int
-    
+
     override init(withDict dictionary : [String: Any]) throws {
         do {
             
@@ -54,7 +59,7 @@ class PersonalWeatherStation : WeatherStation {
             self.id = id
             self.distanceKm = distanceKm
             self.distanceMile = distanceMile
-            
+
             try super.init(withDict: dictionary)
         }
     }
@@ -63,19 +68,15 @@ class PersonalWeatherStation : WeatherStation {
 class AirportWeatherStation : WeatherStation {
     
     var icao: String
-    var coordinates: CoordinateLocation
     
     override init(withDict dictionary : [String: Any]) throws {
         do {
             
-            guard let icao = dictionary["icao"] as? String,
-                let lat = dictionary[LocationKey.lat] as? String,
-                let lon = dictionary[LocationKey.lon] as? String else {
+            guard let icao = dictionary["icao"] as? String else {
                 throw SerializationError.missing
             }
             
             self.icao = icao
-            self.coordinates = CoordinateLocation(latitude: lat, longitude: lon)
             
             try super.init(withDict: dictionary)
         }

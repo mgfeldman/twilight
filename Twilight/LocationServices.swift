@@ -16,13 +16,14 @@ protocol LocationServicesDelegate {
 
 class LocationServices: NSObject {
     
-    static let shared = LocationServices()
-    private var currentLocation : CoordinateLocation?    
+//    static let shared = LocationServices()
+    var currentLocation : CoordinateLocation?
     let locationManager = CLLocationManager()
     var delegates = [LocationServicesDelegate]()
+    var observer: LocationServicesDelegate
     
-    override init() {
-        super.init()
+    init(withObserver observer: LocationServicesDelegate) {
+        self.observer = observer
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
 //            locationManager.delegate = self
@@ -61,6 +62,7 @@ class LocationServices: NSObject {
         }) { (lastValidLocation, error) in
             log.error("Error occurred getting location: \(error.description)")
             if lastValidLocation != nil {
+                log.debug("Setting location to last valid location")
                 self.setCurrentLocation(location: lastValidLocation!)
             }
         }
@@ -78,7 +80,8 @@ class LocationServices: NSObject {
             self.currentLocation = CoordinateLocation(latitude: latitude, longitude: longitude)
         }
         
-        self.notifyLocationChanged()
+//        self.notifyLocationChanged()
+        observer.locationChanged(currentLocation: currentLocation!)
     }
     
     private func notifyLocationChanged() {

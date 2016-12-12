@@ -10,45 +10,31 @@ import UIKit
 
 class WUUpdater: NSObject {
     
-    static let webService = WundergroundWebService.shared
+    static let webService = WUWebService.shared
 
     static func update(withFeatures features: WUFeatureType...,
         withLocation location: CoordinateLocation?,
-        success: @escaping ([String : Any]) -> Void,
-        failure: @escaping (Error?) -> Void) {
+        success: @escaping (WUResponse) -> Void,
+        failure: @escaping (WUError?) -> Void) {
         
         let request = WURequest(features: features, location: location)
         
+        let retrievalSuccess = { (dictionary: [String: Any]) in
+            let response = WUResponse()
+            response.parseFeatures(json: dictionary)
+            success(response)
+        }
+        
         webService.retrieveData(request: request,
-                                success: success,
+                                success: retrievalSuccess,
                                 failure: failure)
     }
     
-    static func updateGeoLookup(withLocation location: CoordinateLocation,
-                         success: @escaping ([String : Any]) -> Void,
-                         failure: @escaping (Error?) -> Void) {
+    static func updateAllFeatures(withLocation location: CoordinateLocation,
+                               success: @escaping (WUResponse) -> Void,
+                               failure: @escaping (WUError?) -> Void) {
         
-        self.update(withFeatures: .geolookup,
-                    withLocation: location,
-                    success: success,
-                    failure: failure)
-    }
-    
-    static func updateConditions(withLocation location: CoordinateLocation,
-                          success: @escaping ([String : Any]) -> Void,
-                          failure: @escaping (Error?) -> Void) {
-        
-        self.update(withFeatures: .conditions,
-                    withLocation: location,
-                    success: success,
-                    failure: failure)
-    }
-    
-    static func updateForecast(withLocation location: CoordinateLocation,
-                        success: @escaping ([String : Any]) -> Void,
-                        failure: @escaping (Error?) -> Void) {
-        
-        self.update(withFeatures: .forecast,
+        self.update(withFeatures: .geolookup, .conditions,
                     withLocation: location,
                     success: success,
                     failure: failure)
