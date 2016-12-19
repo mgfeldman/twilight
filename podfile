@@ -7,5 +7,6 @@ target 'Twilight' do
     pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git'
     pod 'SwiftLocation', :git => 'https://github.com/malcommac/SwiftLocation.git'
     pod 'XCGLogger', '~> 4.0.0'
+    pod 'SwiftyJSON'
 end
 

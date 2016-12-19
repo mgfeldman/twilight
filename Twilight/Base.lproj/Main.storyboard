@@ -134,7 +134,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="background" destination="4wZ-Aw-CRN" id="M97-ip-i2q"/>
                         <outlet property="cityLabel" destination="XVS-2Q-Gsd" id="XKm-Oj-iKs"/>
                         <outlet property="currentTemperatureLabel" destination="Fhe-1m-5og" id="3YN-Hy-7il"/>
                         <outlet property="descriptionLabel" destination="Ign-oe-VAl" id="qu6-1m-hEz"/>
@@ -185,7 +184,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bs3-NQ-cgx" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="10b-oL-AoE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="10b-oL-AoE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 public enum WUFeatureType : String {
     case conditions    = "conditions"
@@ -36,7 +37,7 @@ class WUWebService: NSObject {
         super.init()
     }
 
-    func retrieveData(request: WURequest, success: @escaping ([String: Any]) -> Void, failure: @escaping (WUError?) -> Void) {
+    func retrieveData(request: WURequest, success: @escaping (JSON) -> Void, failure: @escaping (WUError?) -> Void) {
         
         guard let requestString = request.requestString else {
             failure(WUError(withMessage: "WURequest missing requestString"))
@@ -54,13 +55,13 @@ class WUWebService: NSObject {
                     return
                 }
                 
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions()) as! [String : Any]
+//                do {
+                    let json = JSON(data: data)
                     success(json)
-                } catch let parsingError as NSError {
-                    log.error("Error converting data to JSON object.")
-                    failure(WUError(fromError: parsingError))
-                }
+//                } catch let parsingError as NSError {
+//                    log.error("Error converting data to JSON object.")
+//                    failure(WUError(fromError: parsingError))
+//                }
         }
     }
 }

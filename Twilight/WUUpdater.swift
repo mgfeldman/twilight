@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class WUUpdater: NSObject {
     
@@ -19,7 +20,7 @@ class WUUpdater: NSObject {
         
         let request = WURequest(features: features, location: location)
         
-        let retrievalSuccess = { (dictionary: [String: Any]) in
+        let retrievalSuccess = { (dictionary: JSON) in
             let response = WUResponse()
             response.parseFeatures(json: dictionary)
             success(response)
@@ -34,7 +35,7 @@ class WUUpdater: NSObject {
                                success: @escaping (WUResponse) -> Void,
                                failure: @escaping (WUError?) -> Void) {
         
-        self.update(withFeatures: .geolookup, .conditions,
+        self.update(withFeatures: .geolookup, .conditions, .forecast,
                     withLocation: location,
                     success: success,
                     failure: failure)

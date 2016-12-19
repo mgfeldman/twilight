@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 enum WeatherStationType {
     static let airport = "airport"
     static let personal = "pws"
 }
 
-class WeatherStation : NSObject {
+class WeatherStation: NSObject {
     
     var city: String
     var state: String
@@ -21,15 +22,16 @@ class WeatherStation : NSObject {
     var coordinates: CoordinateLocation
     
     
-    init(withDict dictionary : [String: Any]) throws {
+    init(withDict dictionary: JSON) throws {
         
-        guard let city = dictionary[LocationKey.city] as? String,
-            let state = dictionary[LocationKey.state] as? String,
-            let country = dictionary[LocationKey.country] as? String,
-            let lat = dictionary[LocationKey.lat],
-            let lon = dictionary[LocationKey.lon] else {
+        guard let city = dictionary[LocationKey.city].string,
+            let state = dictionary[LocationKey.state].string,
+            let country = dictionary[LocationKey.country].string else {
                 throw SerializationError.missing
         }
+        
+        let lat = dictionary[LocationKey.lat].object
+        let lon = dictionary[LocationKey.lon].object
         
         self.city = city
         self.state = state
@@ -39,19 +41,19 @@ class WeatherStation : NSObject {
     
 }
 
-class PersonalWeatherStation : WeatherStation {
+class PersonalWeatherStation: WeatherStation {
     var neighborhood: String
     var id: String
     var distanceKm: Int
     var distanceMile: Int
 
-    override init(withDict dictionary : [String: Any]) throws {
+    override init(withDict dictionary: JSON) throws {
         do {
             
-            guard let neighborhood = dictionary[LocationKey.neighborhood] as? String,
-                let id = dictionary[LocationKey.id] as? String,
-                let distanceKm = dictionary["distance_km"] as? Int,
-                let distanceMile = dictionary["distance_mi"] as? Int else {
+            guard let neighborhood = dictionary[LocationKey.neighborhood].string,
+                let id = dictionary[LocationKey.id].string,
+                let distanceKm = dictionary["distance_km"].int,
+                let distanceMile = dictionary["distance_mi"].int else {
                 throw SerializationError.missing
             }
             
@@ -69,10 +71,10 @@ class AirportWeatherStation : WeatherStation {
     
     var icao: String
     
-    override init(withDict dictionary : [String: Any]) throws {
+    override init(withDict dictionary : JSON) throws {
         do {
             
-            guard let icao = dictionary["icao"] as? String else {
+            guard let icao = dictionary["icao"].string else {
                 throw SerializationError.missing
             }
             

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 let observationLocationKey = "observation_location"
 let displayLocationKey     = "display_location"
@@ -42,29 +43,29 @@ class CurrentObservation: NSObject {
     
     var displayableWeatherString : String
     
-    init(withDict dictionary : [String : Any]) throws {
+    init(withDict dictionary: JSON) throws {
         
-        guard let observationLocation = dictionary[observationLocationKey],
-            let displayLocation = dictionary[displayLocationKey],
-            let stationID = dictionary[stationIDKey] as? String,
-            let observationTime = dictionary[observationTimeKey] as? String,
-            let observationEpoch = dictionary[observationEpochKey] as? String,
-            let weatherDescription =  dictionary[weatherDescriptionKey] as? String,
-            let temperatureString =  dictionary[temperatureStringKey] as? String,
-            let temperatureF =  dictionary[temperatureFKey] as? Double,
-            let temperatureC =  dictionary[temperatureCKey] as? Double,
-            let relativeHumidity =  dictionary[relativeHumidityKey] as? String,
-            let windDescription =  dictionary[windDescriptionKey] as? String,
-            let feelsLikeF =  dictionary[feelsLikeFKey] as? String,
-            let feelsLikeC =  dictionary[feelsLikeCKey] as? String,
-            let iconURL =  dictionary[iconURLKey] as? String
+        guard dictionary[observationLocationKey].exists(),
+            dictionary[displayLocationKey].exists(),
+            let stationID = dictionary[stationIDKey].string,
+            let observationTime = dictionary[observationTimeKey].string,
+            let observationEpoch = dictionary[observationEpochKey].string,
+            let weatherDescription =  dictionary[weatherDescriptionKey].string,
+            let temperatureString =  dictionary[temperatureStringKey].string,
+            let temperatureF =  dictionary[temperatureFKey].double,
+            let temperatureC =  dictionary[temperatureCKey].double,
+            let relativeHumidity =  dictionary[relativeHumidityKey].string,
+            let windDescription =  dictionary[windDescriptionKey].string,
+            let feelsLikeF =  dictionary[feelsLikeFKey].string,
+            let feelsLikeC =  dictionary[feelsLikeCKey].string,
+            let iconURL =  dictionary[iconURLKey].string
             else {
                 
                 throw SerializationError.missing
         }
         
-        self.observationLocation = try ObservationLocation(withDict: observationLocation as! [String : Any])
-        self.displayLocation = try DisplayLocation(withDict: displayLocation as! [String : Any])
+        self.observationLocation = try ObservationLocation(withDict: dictionary[observationLocationKey])
+        self.displayLocation = try DisplayLocation(withDict: dictionary[displayLocationKey])
         self.stationID = stationID 
         self.observationTime = observationTime
         self.observationEpoch = observationEpoch

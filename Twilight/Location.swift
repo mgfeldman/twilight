@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 enum LocationKey {
     
@@ -47,23 +48,23 @@ class Location: NSObject {
     var wuiURL: String?
     var nearbyWeatherStations = [WeatherStation]()
 
-    init(withDict json: [String : Any]) throws {
+    init(withDict json: JSON) throws {
         var longitudeKey = LocationKey.lon
         var latitudeKey = LocationKey.lat
         
         // Some responses have "longitude/latitude" instead of "lon/lat" -_-
-        if json.keys.contains(where: {$0 == "latitude"}) {
+        if json["latitude"] != JSON.null {
             longitudeKey = "latitude"
             latitudeKey = "longitude"
         }
 
         // These fields are shared by all members of Location
-        guard let country = json[LocationKey.country] as? String,
-            let countryISO3166 = json[LocationKey.countryIso3166] as? String,
-            let state = json[LocationKey.state] as? String,
-            let city = json[LocationKey.city] as? String,
-            let lat = json[latitudeKey] as? String,
-            let lon =  json[longitudeKey] as? String else {
+        guard let country = json[LocationKey.country].string,
+            let countryISO3166 = json[LocationKey.countryIso3166].string,
+            let state = json[LocationKey.state].string,
+            let city = json[LocationKey.city].string,
+            let lat = json[latitudeKey].string,
+            let lon =  json[longitudeKey].string else {
                 throw SerializationError.missing
         }
 
@@ -74,16 +75,16 @@ class Location: NSObject {
         self.coordinates = CoordinateLocation(latitude: lat, longitude: lon)
         
         // optional fields
-        self.countryName = json[LocationKey.countryName] as? String
-        self.zip = json[LocationKey.zip] as? String
-        self.coordinates.elevation = json[LocationKey.elevation] as? String
-        self.wuiURL = json[LocationKey.wuiurl] as? String
-        self.timeZoneShort = json[LocationKey.timeZone] as? String
-        self.type = json[LocationKey.type] as? String
+        self.countryName = json[LocationKey.countryName].string
+        self.zip = json[LocationKey.zip].string
+        self.coordinates.elevation = json[LocationKey.elevation].string
+        self.wuiURL = json[LocationKey.wuiurl].string
+        self.timeZoneShort = json[LocationKey.timeZone].string
+        self.type = json[LocationKey.type].string
         
-        guard let nearbyStations = json[LocationKey.nearbyStations] as? [String : Any],
-            let airportStations = nearbyStations[WeatherStationType.airport] as? [String : Any],
-            let aStations = airportStations[LocationKey.station] as? [[String : String]] else { return }
+        guard let nearbyStations = json[LocationKey.nearbyStations].dictionary,
+            let airportStations = nearbyStations[WeatherStationType.airport]?.dictionary,
+            let aStations = airportStations[LocationKey.station]?.array else { return }
 
         for station in aStations {
             do {
@@ -94,8 +95,8 @@ class Location: NSObject {
             }
         }
 
-        guard let personalStations = nearbyStations[WeatherStationType.personal] as? [String : Any],
-            let pStations = personalStations[LocationKey.station] as? [[String : Any]] else { return }
+        guard let personalStations = nearbyStations[WeatherStationType.personal]?.dictionary,
+            let pStations = personalStations[LocationKey.station]?.array else { return }
         
         for station in pStations {
             do {
@@ -111,8 +112,8 @@ class Location: NSObject {
 class ObservationLocation : Location {
     var full: String
     
-    override init(withDict dictionary : [String : Any]) throws {
-        self.full = dictionary["full"] as! String
+    override init(withDict dictionary: JSON) throws {
+        self.full = dictionary["full"].stringValue
         try super.init(withDict: dictionary)
     }
 }
@@ -120,8 +121,8 @@ class ObservationLocation : Location {
 class DisplayLocation : Location {
     var stateName: String
     
-    override init(withDict dictionary : [String : Any]) throws {
-        self.stateName = dictionary["state_name"] as! String
+    override init(withDict dictionary: JSON) throws {
+        self.stateName = dictionary["state_name"].stringValue
         try super.init(withDict: dictionary)
     }
 }
