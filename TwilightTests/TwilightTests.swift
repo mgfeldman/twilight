@@ -35,7 +35,7 @@ class TwilightTests: XCTestCase {
     
     func testFormUrlString() {
         let location = CoordinateLocation(coordinateString: "37.77992308,-122.4697366")
-        let request = WundergroundWebService.WURequest(features: [.geolookup], location: location)
+        let request = WURequest(features: [.geolookup], location: location)
         
         let expectedRequestString = "http://api.wunderground.com/api/005ecab154b1d3ca/geolookup/q/37.77992308,-122.4697366.json"
         
@@ -43,18 +43,18 @@ class TwilightTests: XCTestCase {
     }
     
     func testFormUrlString_WithNilLocation() {
-        var request = WundergroundWebService.WURequest(features: [.geolookup], location: nil)
+        var request = WURequest(features: [.geolookup], location: nil)
         request.useIpAddress = false
         XCTAssertNil(request.requestString)
     }
     
     func testFormUrlString_WithNilLocation_UseIpAddress() {
-        let request = WundergroundWebService.WURequest(features: [.geolookup], location: nil)
+        let request = WURequest(features: [.geolookup], location: nil)
         XCTAssertNotNil(request.requestString)
     }
     
     func testFormUrlString_WithEmptyFeatures() {
-        let request = WundergroundWebService.WURequest(features: [], location: nil)
+        let request = WURequest(features: [], location: nil)
         XCTAssertNil(request.requestString)
     }
     

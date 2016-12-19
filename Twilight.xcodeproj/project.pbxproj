@@ -23,6 +23,7 @@
 		4DF10BD21D6FD53700F2F183 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DF10BD01D6FD53700F2F183 /* Main.storyboard */; };
 		4DF10BD41D6FD53700F2F183 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DF10BD31D6FD53700F2F183 /* Assets.xcassets */; };
 		4DF10BD71D6FD53700F2F183 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DF10BD51D6FD53700F2F183 /* LaunchScreen.storyboard */; };
+		4DFD35D71E0862C100D661F0 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFD35D61E0862C100D661F0 /* Forecast.swift */; };
 		E69904F1D6B0160DB5BFFC5A /* Pods_Twilight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB448B5E50C01FBDFB23988 /* Pods_Twilight.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		4DF10BD31D6FD53700F2F183 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DF10BD61D6FD53700F2F183 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4DF10BD81D6FD53700F2F183 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DFD35D61E0862C100D661F0 /* Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		FEFBB7DE7FD38361314E2F46 /* Pods-Twilight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twilight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Twilight/Pods-Twilight.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +105,7 @@
 		4D534D7D1D70E05300ED90DC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4DFD35D61E0862C100D661F0 /* Forecast.swift */,
 				4D534D7E1D70E07000ED90DC /* WeatherStation.swift */,
 				4D534D801D70E0A500ED90DC /* Location.swift */,
 				4D534D821D70E0D300ED90DC /* CoordinateLocation.swift */,
@@ -335,6 +338,7 @@
 				4D70DBBB1DFE3576005E7C23 /* WUResponse.swift in Sources */,
 				4D534D861D70E51100ED90DC /* WUWebService.swift in Sources */,
 				4DB8951F1D8467200006D6A0 /* CurrentObservation.swift in Sources */,
+				4DFD35D71E0862C100D661F0 /* Forecast.swift in Sources */,
 				4DF10BCF1D6FD53700F2F183 /* ViewController.swift in Sources */,
 				4D534D7F1D70E07000ED90DC /* WeatherStation.swift in Sources */,
 				4DD643DC1DFDD87D00A9A836 /* WURequest.swift in Sources */,

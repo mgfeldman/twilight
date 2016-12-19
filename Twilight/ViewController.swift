@@ -12,8 +12,11 @@ class StationCell: UITableViewCell {
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var label2: UILabel!
 }
-class ViewController: UIViewController, LocationServicesDelegate, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController {
 
+    @IBOutlet weak var navbarLabel2: UILabel!
+    @IBOutlet weak var navbarLabel1: UILabel!
+    @IBOutlet var navbarView: UIView!
     @IBOutlet weak var stationsTableView: UITableView!
     @IBOutlet weak var observationLocation: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
@@ -28,6 +31,9 @@ class ViewController: UIViewController, LocationServicesDelegate, UITableViewDel
             }
         }
     }
+    var navbarLabel: UILabel = UILabel(frame: CGRect(x:0, y:0, width:400, height:50))
+    var currentLocation: Location?
+    var currentObservation: CurrentObservation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,33 +41,64 @@ class ViewController: UIViewController, LocationServicesDelegate, UITableViewDel
         locationService?.getLocation()
         stationsTableView.delegate = self
         stationsTableView.dataSource = self
+        
+//        let navBarFrame = self.navigationController?.navigationItem.titleView?.frame
+        
+//        navbarLabel = UILabel(frame: CGRect(x:0, y:0, width:400, height:50))
+//        navbarLabel.backgroundColor = UIColor.clear
+//        navbarLabel.numberOfLines = 2
+//        navbarLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+//        navbarLabel.textAlignment = .center
+//        navbarLabel.textColor = UIColor.white
+        
+        self.navigationItem.titleView = navbarView
+
+        
+        
+    }
+    
+    func updateNavigationBar(location: Location, conditions: CurrentObservation) {
+//        navbarLabel.text = "\(location.city)\n11:07pm"
+        navbarLabel1.text = conditions.observationLocation.city
+        navbarLabel2.text = conditions.observationTime.replacingOccurrences(of: "Last Updated on", with: "")
     }
     
     func updateView(location : Location, conditions: CurrentObservation) {
-        stations = location.nearbyWeatherStations
         DispatchQueue.main.async {
             self.cityLabel.text = location.city + ", " + location.state
             self.currentTemperatureLabel.text = conditions.displayableWeatherString
         }
     }
     
+    func updateStationsTableView(stations: [WeatherStation]?) {
+        if let stations = stations {
+            self.stations = stations
+        }
+    }
+
+}
+
+extension ViewController: LocationServicesDelegate {
+    
     func locationChanged(currentLocation: CoordinateLocation) {
         WUUpdater.updateAllFeatures(withLocation: currentLocation,
         success: { (response) -> Void in
             self.updateView(location: response.location!, conditions: response.conditions!)
+            self.updateStationsTableView(stations: response.location?.nearbyWeatherStations)
+            self.updateNavigationBar(location: response.location!, conditions: response.conditions!)
         }, failure: {(error: WUError?) -> Void in
             let alertController = UIAlertController(title: "Error", message: error?.message, preferredStyle:
-                    UIAlertControllerStyle.alert)
+                UIAlertControllerStyle.alert)
             self.present(alertController, animated: true, completion: nil)
         })
     }
+}
+
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
-    @IBAction func btnPressed(_ sender: AnyObject) {
-        
-        locationService!.getLocation()
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
-    
-    //MARK: UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -84,11 +121,7 @@ class ViewController: UIViewController, LocationServicesDelegate, UITableViewDel
         
         return cell
     }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return stations.count
     }
@@ -99,8 +132,8 @@ class ViewController: UIViewController, LocationServicesDelegate, UITableViewDel
         let location = CoordinateLocation(latitude: selectedStation.coordinates.latitude!,
                                           longitude: selectedStation.coordinates.longitude!)
         WUUpdater.updateAllFeatures(withLocation: location,
-                                    success: { (response) -> Void in
-                                        self.updateView(location: response.location!, conditions: response.conditions!)
+        success: { (response) -> Void in
+            self.updateView(location: response.location!, conditions: response.conditions!)
         }, failure: {(error: WUError?) -> Void in
             let alertController = UIAlertController(title: "Error", message: error?.message, preferredStyle:
                 UIAlertControllerStyle.alert)
@@ -109,3 +142,26 @@ class ViewController: UIViewController, LocationServicesDelegate, UITableViewDel
     }
 }
 
+extension UIImageView {
+    
+    func setGradientFor(dominantColor: UIColor, lightColor: UIColor, alpha: CGFloat) {
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = self.frame
+        
+        gradient.colors = [dominantColor.cgColor, lightColor.cgColor]
+        
+        UIGraphicsBeginImageContext(gradient.bounds.size)
+        if let context = UIGraphicsGetCurrentContext() {
+            gradient.render(in: context)
+        }
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        self.image = image
+    }
+    
+    func setBlackGradient(alpha: CGFloat) {
+        self.setGradientFor(dominantColor: .black, lightColor: .clear, alpha: alpha)
+    }
+}

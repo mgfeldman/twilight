@@ -48,7 +48,6 @@ class Location: NSObject {
     var nearbyWeatherStations = [WeatherStation]()
 
     init(withDict json: [String : Any]) throws {
-        
         var longitudeKey = LocationKey.lon
         var latitudeKey = LocationKey.lat
         
