@@ -67,7 +67,7 @@ class CurrentObservation: NSObject {
         self.observationLocation = try ObservationLocation(withDict: dictionary[observationLocationKey])
         self.displayLocation = try DisplayLocation(withDict: dictionary[displayLocationKey])
         self.stationID = stationID 
-        self.observationTime = observationTime
+        self.observationTime = observationTime.replacingOccurrences(of: "Last Updated on", with: "")
         self.observationEpoch = observationEpoch
         self.weatherDescription = weatherDescription
         self.temperatureString = temperatureString

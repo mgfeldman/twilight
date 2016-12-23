@@ -40,4 +40,21 @@ class WUUpdater: NSObject {
                     success: success,
                     failure: failure)
     }
+    
+    static func autoComplete(searchString: String,
+        success: @escaping (WUAutoCompleteResponse) -> Void,
+        failure: @escaping (WUError?) -> Void) {
+        
+        let request = WUAutoCompleteRequest(partialString: searchString)
+        
+        let retrievalSuccess = { (dictionary: JSON) in
+            let response = WUAutoCompleteResponse(withJson: dictionary)
+//            response.parseFeatures(json: dictionary)
+            success(response)
+        }
+        
+        webService.retrieveAutoComplete(request: request,
+                                success: retrievalSuccess,
+                                failure: failure)
+    }
 }

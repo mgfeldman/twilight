@@ -59,3 +59,16 @@ public struct WURequest {
         return urlWithParams
     }
 }
+
+public struct WUAutoCompleteRequest {
+    
+    let baseURL = "http://autocomplete.wunderground.com/aq?query="
+    var requestString: String?
+    
+    init(partialString: String, countryCode: String? = nil) {
+        requestString = baseURL + partialString.replacingOccurrences(of: " ", with: "%20")
+        if let code = countryCode {
+            requestString = requestString! + "&=\(code)"
+        }
+    }
+}

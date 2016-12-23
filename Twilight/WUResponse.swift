@@ -66,3 +66,44 @@ class WUResponse: NSObject {
         }
     }
 }
+
+public struct WUAutoCompleteResponse {
+    
+    var results = [WUAutoCompleteResult]()
+    var cities: [WUAutoCompleteResult] {
+        get {
+            return results.filter{$0.type == "city"}
+        }
+    }
+    
+    init() {
+        
+    }
+    
+    init(withJson json: JSON) {
+        if let resultsArray = json["RESULTS"].array {
+            for result in resultsArray  {
+                results.append(WUAutoCompleteResult(withJson: result))
+            }
+        }
+    }
+}
+
+class WUAutoCompleteResult: NSObject {
+    var city: String
+    var country: String
+    var type: String
+    var requestLink: String
+    var location: CoordinateLocation?
+    
+    init(withJson json: JSON) {
+        self.city = json["name"].stringValue
+        self.country = json["c"].stringValue
+        self.type = json["type"].stringValue
+        self.requestLink = json["l"].stringValue
+        
+        if let lat = json["lat"].string, let lon = json["lon"].string {
+            self.location = CoordinateLocation(latitude: lat, longitude: lon)
+        }
+    }
+}

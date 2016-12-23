@@ -78,10 +78,10 @@ struct Date {
         day = json["day"].intValue
         month = json["month"].intValue
         year = json["year"].intValue
-        monthName = json["monthName"].stringValue
-        monthNameShort = json["monthNameShort"].stringValue
+        monthName = json["monthname"].stringValue
+        monthNameShort = json["monthname_short"].stringValue
         weekday = json["weekday"].stringValue
-        weekdayShort = json["weekdayShort"].stringValue
+        weekdayShort = json["weekday_short"].stringValue
         ampm = json["ampm"].stringValue
         tzShort = json["tz_short"].stringValue
         tzLong = json["tz_long"].stringValue

@@ -55,13 +55,31 @@ class WUWebService: NSObject {
                     return
                 }
                 
-//                do {
-                    let json = JSON(data: data)
-                    success(json)
-//                } catch let parsingError as NSError {
-//                    log.error("Error converting data to JSON object.")
-//                    failure(WUError(fromError: parsingError))
-//                }
+                let json = JSON(data: data)
+                success(json)
+        }
+    }
+    
+    func retrieveAutoComplete(request: WUAutoCompleteRequest, success: @escaping (JSON) -> Void, failure: @escaping (WUError?) -> Void) {
+        
+        guard let requestString = request.requestString else {
+            failure(WUError(withMessage: "WURequest missing requestString"))
+            return
+        }
+        
+        log.debug("Requesting from \(requestString)")
+        
+        Alamofire.request(requestString)
+            .validate()
+            .responseData { response in
+                
+                guard let data = response.data, response.result.isSuccess == true else {
+                    failure(WUError(fromError: response.result.error))
+                    return
+                }
+                
+                let json = JSON(data: data)
+                success(json)
         }
     }
 }
