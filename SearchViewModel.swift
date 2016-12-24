@@ -22,7 +22,7 @@ class SearchViewModel: NSObject {
     
     func refreshData(searchString: String) {
         
-        WUUpdater.autoComplete(searchString: searchString, success: { (response) in
+        WUUpdater.autoComplete(searchString: searchString, success: { [unowned self] (response) in
             self.searchResults = response
             self.filteredResults = response
             self.reloadViewCallback()
@@ -48,21 +48,15 @@ class SearchViewModel: NSObject {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: BaseTableViewController.tableViewCellIdentifier, for: indexPath)
         let searchResult = searchResults.results[indexPath.row]
-        cell.textLabel?.text = searchResult.city
+        cell.textLabel?.text = searchResult.name
         cell.detailTextLabel?.text = searchResult.country
         
         return cell
     }
     
-//    func selectedRowAt(indexPath: IndexPath) {
-//        
-//        if let selectedStation = self.location?.nearbyWeatherStations[indexPath.row] {
-//            let location = CoordinateLocation(latitude: selectedStation.coordinates.latitude!,
-//                                              longitude: selectedStation.coordinates.longitude!)
-//            
-//            retrieveData(location: location)
-//        }
-//    }
+    func selectedRowAt(indexPath: IndexPath) {
+
+    }
     
     func updateSearchResults(for searchController: UISearchController) {
      
@@ -82,14 +76,14 @@ class SearchViewModel: NSObject {
             // NSPredicate is made up of smaller, atomic parts: two NSExpressions (a left-hand value and a right-hand value).
             
             // Name field matching.
-            let titleExpression = NSExpression(forKeyPath: "city")
+            let cityExpression = NSExpression(forKeyPath: "name")
             let searchStringExpression = NSExpression(forConstantValue: searchString)
             
-            let titleSearchComparisonPredicate = NSComparisonPredicate(leftExpression: titleExpression, rightExpression: searchStringExpression, modifier: .direct, type: .contains, options: .caseInsensitive)
+            let citySearchComparisonPredicate = NSComparisonPredicate(leftExpression: cityExpression, rightExpression: searchStringExpression, modifier: .direct, type: .contains, options: .caseInsensitive)
             
-            searchItemsPredicate.append(titleSearchComparisonPredicate)
+            searchItemsPredicate.append(citySearchComparisonPredicate)
             
-            // Add this OR predicate to our master AND predicate.
+            // Add this OR predicate to our master AND predicate.p
             let orMatchPredicate = NSCompoundPredicate(orPredicateWithSubpredicates:searchItemsPredicate)
             
             return orMatchPredicate

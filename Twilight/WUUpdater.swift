@@ -49,7 +49,6 @@ class WUUpdater: NSObject {
         
         let retrievalSuccess = { (dictionary: JSON) in
             let response = WUAutoCompleteResponse(withJson: dictionary)
-//            response.parseFeatures(json: dictionary)
             success(response)
         }
         

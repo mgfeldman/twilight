@@ -90,14 +90,14 @@ public struct WUAutoCompleteResponse {
 }
 
 class WUAutoCompleteResult: NSObject {
-    var city: String
+    var name: String
     var country: String
     var type: String
     var requestLink: String
     var location: CoordinateLocation?
     
     init(withJson json: JSON) {
-        self.city = json["name"].stringValue
+        self.name = json["name"].stringValue
         self.country = json["c"].stringValue
         self.type = json["type"].stringValue
         self.requestLink = json["l"].stringValue

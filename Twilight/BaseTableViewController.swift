@@ -10,26 +10,20 @@ import UIKit
 
 class BaseTableViewController: UITableViewController {
     
-    // MARK: - Types
-    
     static let nibName = "TableCell"
     static let tableViewCellIdentifier = "cellID"
-    
-    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let nib = UINib(nibName: BaseTableViewController.nibName, bundle: nil)
-        
-        // Required if our subclasses are to use `dequeueReusableCellWithIdentifier(_:forIndexPath:)`.
         tableView.register(nib, forCellReuseIdentifier: BaseTableViewController.tableViewCellIdentifier)
+        tableView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.7468278104)
+        self.tableView.tableFooterView = UIView()
+
     }
     
-    // MARK: - Configuration
-    
     func configureCell(_ cell: UITableViewCell, forResult result: WUAutoCompleteResult) {
-        cell.textLabel?.text = result.city
-        cell.detailTextLabel?.text = result.country
+        cell.textLabel?.text = result.name
     }
 }
